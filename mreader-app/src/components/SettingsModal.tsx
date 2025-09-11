@@ -1,7 +1,5 @@
 import React from 'react';
-
-
-type VisualMode = 'light' | 'night' | 'book';
+import type { VisualMode } from '../types';
 
 interface SettingsModalProps {
   wpm: number;

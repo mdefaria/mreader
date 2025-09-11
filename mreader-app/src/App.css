@@ -1,3 +1,16 @@
+/* Card background and border for book grid, theme-aware */
+.theme-light {
+  --card-bg: #fff;
+  --card-border: #e0e0e0;
+}
+.theme-night {
+  --card-bg: #23232b;
+  --card-border: #444;
+}
+.theme-book {
+  --card-bg: #f6f1e7;
+  --card-border: #e0d6c3;
+}
 /* Visual mode themes */
 .theme-light, .theme-light body, .theme-light #root, .theme-light .rsvp-app {
   background: #fff !important;

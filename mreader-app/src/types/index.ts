@@ -4,3 +4,7 @@ export type Word = {
   pivotIndex: number;
   baseDelayMs: number;
 };
+
+// Visual modes supported by the UI
+export type VisualMode = 'light' | 'night' | 'book';
+
