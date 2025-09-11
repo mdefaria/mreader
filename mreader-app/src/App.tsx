@@ -1,11 +1,13 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './App.css';
-import { tokenizeWords } from './utils/tokenize';
 import { RsvpPlayer } from './components/RsvpPlayer';
 import { ContextPage } from './components/ContextPage';
 import { SettingsModal } from './components/SettingsModal';
-import type { Word, VisualMode } from './types';
-import { loadState, saveState, addBook, listBooks, getBook, updateBookIndex } from './services/persistence';
+import type { VisualMode, Word } from './types';
+import { loadState, saveState, clearState } from './services/persistence';
+import type { WordSource, LoadResult, LoaderProgress, SegmentMeta } from './types/book';
+import { loadEpub } from './services/loaders/epubLoader';
+import { loadPdf } from './services/loaders/pdfLoader';
 
 // Fill this with your own text
 // Remove default book text; will be loaded from file
@@ -18,29 +20,24 @@ function App() {
     fileInputRef.current?.click();
   };
   // Hydrate persisted state asynchronously (IndexedDB)
-  type PersistSnapshot = { loaded: boolean; wpm?: number; visualMode?: VisualMode; bookText?: string | null; index?: number };
+  type PersistSnapshot = { loaded: boolean; wpm?: number; visualMode?: VisualMode; activeBookId?: string };
   const persisted = useRef<PersistSnapshot>({ loaded: false });
   const [wpm, setWpm] = useState(DEFAULT_WPM);
   const [visualMode, setVisualMode] = useState<VisualMode>('light');
-  const [bookText, setBookText] = useState<string | null>(null);
-  const [activeBookId, setActiveBookId] = useState<string | undefined>(undefined);
-  const [library, setLibrary] = useState<Array<{ id: string; title: string; size: number; updatedAt: number }>>([]);
+  const [wordSource, setWordSource] = useState<WordSource | null>(null);
+  const [totalWords, setTotalWords] = useState(0);
+  const [loadProgress, setLoadProgress] = useState<LoaderProgress | null>(null);
+  const loadUnsubRef = useRef<() => void | null>(null);
+  const [segments, setSegments] = useState<SegmentMeta[]>([]);
+  const [segmentIndex, setSegmentIndex] = useState(0);
   // RSVP state
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const rafId = useRef<number | null>(null);
   const nextTimeRef = useRef<number>(0);
   const [showSettings, setShowSettings] = useState(false);
-
-  // Only tokenize if bookText is loaded
-  const words: Word[] = useMemo(() => (bookText ? tokenizeWords(bookText, wpm) : []), [bookText, wpm]);
-  // Clamp index if book changed or WPM retokenized length shrank
-  useEffect(() => {
-    if (index >= words.length && words.length > 0) {
-      setIndex(0);
-    }
-  }, [words.length, index]);
-  const currentWord = words[index] || null;
+  const currentWord: Word | null = wordSource ? wordSource.get(index) : null;
+  const activeSegment: SegmentMeta | null = segments[segmentIndex] || null;
   // Load persisted state once on mount
   useEffect(() => {
     let cancelled = false;
@@ -48,21 +45,10 @@ function App() {
       const s = await loadState();
       if (cancelled) return;
       persisted.current = { loaded: true, ...s } as PersistSnapshot;
-      if (typeof s.wpm === 'number') setWpm(s.wpm);
-      if (s.visualMode) setVisualMode(s.visualMode);
-      // v2 keeps activeBookId only
-      if (typeof s.activeBookId === 'string') {
-        const id = s.activeBookId;
-        setActiveBookId(id);
-        const book = await getBook(id);
-        if (book) {
-          setBookText(book.text);
-          setIndex(Math.max(0, book.index || 0));
-        }
-      }
-      // load library list
-      const books = await listBooks();
-      setLibrary(books.map(b => ({ id: b.id, title: b.title, size: b.size, updatedAt: b.updatedAt })));
+  if (typeof s.wpm === 'number') setWpm(s.wpm);
+  if (s.visualMode) setVisualMode(s.visualMode);
+  // Phase 1: clear any legacy state (txt model)
+  await clearState();
     })();
     return () => { cancelled = true; };
   }, []);
@@ -74,20 +60,39 @@ function App() {
     if (now >= nextTimeRef.current) {
       setIndex(i => {
         const next = i + 1;
-        if (next >= words.length) {
+        if (next >= totalWords) {
           setIsPlaying(false);
           return i;
         }
-        nextTimeRef.current = now + words[next].baseDelayMs;
+        if (wordSource) {
+          const w = wordSource.get(next);
+          if (!w) {
+            // load segment then resume
+            wordSource.ensure(next).then(() => {
+              if (isPlaying) {
+                const after = wordSource.get(next);
+                if (after) nextTimeRef.current = performance.now() + (60000 / wpm);
+              }
+            });
+            setIsPlaying(false);
+            return i;
+          } else {
+            nextTimeRef.current = now + (60000 / wpm);
+          }
+        }
+        if (activeSegment && next >= activeSegment.startWord + activeSegment.wordCount) {
+          // move to next segment if available
+          setSegmentIndex(s => Math.min(s + 1, segments.length - 1));
+        }
         return next;
       });
     }
     rafId.current = requestAnimationFrame(loop);
-  }, [isPlaying, words]);
+  }, [isPlaying, totalWords, wordSource, activeSegment, segments.length, wpm]);
 
   useEffect(() => {
     if (isPlaying) {
-      nextTimeRef.current = performance.now() + (words[index]?.baseDelayMs || 0);
+      nextTimeRef.current = performance.now() + (60000 / wpm);
       rafId.current = requestAnimationFrame(loop);
     } else if (rafId.current) {
       cancelAnimationFrame(rafId.current);
@@ -96,7 +101,15 @@ function App() {
     return () => {
       if (rafId.current) cancelAnimationFrame(rafId.current);
     };
-  }, [isPlaying, index, words, loop]);
+  }, [isPlaying, index, wordSource, loop, wpm]);
+
+  // Adjust schedule immediately when wpm changes mid-playback
+  useEffect(() => {
+    if (isPlaying) {
+      // Recompute next fire time relative to now to reflect new speed
+      nextTimeRef.current = performance.now() + (60000 / wpm);
+    }
+  }, [wpm, isPlaying]);
 
   // Gesture area handler (only active in reader)
   const handleGesture = (e: React.MouseEvent | React.TouchEvent) => {
@@ -114,21 +127,28 @@ function App() {
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const text = event.target?.result as string;
-      const title = file.name || 'Untitled';
-      (async () => {
-        const book = await addBook(title, text);
-        setActiveBookId(book.id);
-        setBookText(book.text);
-        setIndex(0);
-        saveState({ activeBookId: book.id });
-        const books = await listBooks();
-        setLibrary(books.map(b => ({ id: b.id, title: b.title, size: b.size, updatedAt: b.updatedAt })));
-      })();
-    };
-    reader.readAsText(file);
+    setIsPlaying(false);
+    setIndex(0);
+    if (loadUnsubRef.current) loadUnsubRef.current();
+    setLoadProgress({ phase: 'initial', loadedSegments: 0, message: 'Preparing...' });
+    const lower = file.name.toLowerCase();
+    const ext = lower.endsWith('.epub') ? 'epub' : lower.endsWith('.pdf') ? 'pdf' : '';
+    const loaderPromise: Promise<LoadResult> = ext === 'epub' ? loadEpub(file) : ext === 'pdf' ? loadPdf(file) : Promise.reject(new Error('Unsupported file type'));
+    loaderPromise.then(result => {
+      setWordSource(result.wordSource);
+      setTotalWords(result.bookMeta.totalWords);
+      setIndex(result.initialIndex || 0);
+      loadUnsubRef.current = result.progress$((p) => setLoadProgress(p));
+      setLoadProgress({ phase: 'ready', loadedSegments: result.bookMeta.segments.length, totalSegments: result.bookMeta.segments.length, message: 'Ready' });
+      setSegments(result.bookMeta.segments);
+      setSegmentIndex(0);
+    }).catch(err => {
+      setLoadProgress({ phase: 'error', loadedSegments: 0, message: err?.message || 'Failed to load book' });
+      setWordSource(null);
+      setTotalWords(0);
+      setSegments([]);
+      setSegmentIndex(0);
+    });
   };
 
   // Persist settings when they change
@@ -136,34 +156,10 @@ function App() {
     saveState({ wpm, visualMode });
   }, [wpm, visualMode]);
 
-  // Persist activeBookId when it changes
-  useEffect(() => {
-    if (activeBookId) saveState({ activeBookId });
-  }, [activeBookId]);
-
-  // Persist index only when not actively playing to avoid excessive writes
-  const lastSavedIndexRef = useRef(index);
-  useEffect(() => {
-    if (isPlaying) return; // skip while playing
-    if (index !== lastSavedIndexRef.current) {
-      if (activeBookId) {
-        updateBookIndex(activeBookId, index);
-      }
-      lastSavedIndexRef.current = index;
-    }
-  }, [index, isPlaying, activeBookId]);
-
-  // Save index on tab hide (best-effort)
-  useEffect(() => {
-    const handler = () => {
-      if (activeBookId) updateBookIndex(activeBookId, index);
-    };
-    document.addEventListener('visibilitychange', handler);
-    return () => document.removeEventListener('visibilitychange', handler);
-  }, [index, activeBookId]);
+  // (Phase 2) Persist segmented model: skipped in initial implementation.
 
   // Main page (no book loaded)
-  if (!bookText) {
+  if (!wordSource) {
     return (
       <div className={`rsvp-app theme-${visualMode}`} style={{ position: 'relative', overflow: 'hidden' }}>
         <h1 className="rsvp-title">MReader</h1>
@@ -188,47 +184,21 @@ function App() {
         <input
           ref={fileInputRef}
           type="file"
-          accept=".txt"
+          accept=".epub,.pdf"
           style={{ display: 'none' }}
           onChange={handleFile}
         />
         <button className="load-book-btn" style={{ marginTop: 40 }} onClick={openFileDialog}>
-          Load Book
+          Load EPUB / PDF
         </button>
-        {library.length > 0 && (
-          <div style={{ marginTop: 24 }}>
-            <h3 style={{ marginBottom: 8 }}>Resume Reading</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
-              {library.map(b => (
-                <button
-                  key={b.id}
-                  onClick={async () => {
-                    setActiveBookId(b.id);
-                    saveState({ activeBookId: b.id });
-                    const book = await getBook(b.id);
-                    if (book) {
-                      setBookText(book.text);
-                      setIndex(Math.max(0, Math.min(book.index || 0, tokenizeWords(book.text, wpm).length - 1)));
-                    }
-                  }}
-                  style={{
-                    padding: '12px 10px',
-                    textAlign: 'left',
-                    background: 'var(--card-bg, #fff)',
-                    borderRadius: 8,
-                    border: '1px solid var(--card-border, #ddd)',
-                    cursor: 'pointer',
-                    color: 'inherit',
-                    boxShadow: '0 1px 4px 0 #0002',
-                    transition: 'background 0.2s',
-                  }}
-                  title={b.title}
-                >
-                  <div style={{ fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'inherit' }}>{b.title}</div>
-                  <div style={{ fontSize: 12, opacity: 0.7, color: 'inherit' }}>{Math.round(b.size / 1024)} KB • {new Date(b.updatedAt).toLocaleDateString()}</div>
-                </button>
-              ))}
-            </div>
+        {loadProgress && loadProgress.phase !== 'ready' && loadProgress.phase !== 'error' && (
+          <div style={{ marginTop: 24, fontSize: 14, opacity: 0.8 }}>
+            {loadProgress.message || 'Loading...'}
+          </div>
+        )}
+        {loadProgress && loadProgress.phase === 'error' && (
+          <div style={{ marginTop: 24, fontSize: 14, color: 'tomato' }}>
+            {loadProgress.message}
           </div>
         )}
         {/* Settings modal (reused) */}
@@ -249,10 +219,10 @@ function App() {
   return (
     <div className={`rsvp-app theme-${visualMode} ${!isPlaying ? 'is-paused' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
       {isPlaying ? (
-        <RsvpPlayer word={currentWord} />
+        <RsvpPlayer word={currentWord as Word} />
       ) : (
         <div className="context-wrapper">
-          <ContextPage words={words} index={index} onSelectIndex={(i) => setIndex(i)} />
+          <ContextPage wordSource={wordSource} index={index} onSelectIndex={(i) => setIndex(i)} />
         </div>
       )}
       {/* Library / back button */}
@@ -260,9 +230,12 @@ function App() {
         <button
           onClick={() => {
             setIsPlaying(false);
-            if (activeBookId) updateBookIndex(activeBookId, index);
-            // Keep activeBookId so resume grid highlights latest; clear text to show library
-            setBookText(null);
+            setWordSource(null);
+            setTotalWords(0);
+            if (loadUnsubRef.current) loadUnsubRef.current();
+            setLoadProgress(null);
+            setSegments([]);
+            setSegmentIndex(0);
           }}
           style={{
             padding: '6px 10px',
@@ -278,6 +251,33 @@ function App() {
           Library
         </button>
       </div>
+      {!isPlaying && activeSegment && (
+        <>
+          <button
+            aria-label="Previous segment"
+            disabled={segmentIndex === 0}
+            onClick={() => {
+              if (segmentIndex === 0) return;
+              const prevSeg = segments[segmentIndex - 1];
+              setSegmentIndex(segmentIndex - 1);
+              setIndex(prevSeg.startWord);
+            }}
+            style={{ position:'fixed', left: 8, top: '50%', transform:'translateY(-50%)', padding:'10px 12px', borderRadius:'50%', opacity: segmentIndex===0?0.3:0.9, background:'rgba(0,0,0,0.4)', color:'#fff', border:'1px solid #ffffff33', cursor: segmentIndex===0?'default':'pointer', zIndex:40 }}
+          >◀</button>
+          <button
+            aria-label="Next segment"
+            disabled={segmentIndex >= segments.length - 1}
+            onClick={() => {
+              if (segmentIndex >= segments.length - 1) return;
+              const nextSeg = segments[segmentIndex + 1];
+              setSegmentIndex(segmentIndex + 1);
+              setIndex(nextSeg.startWord);
+              wordSource?.prefetch?.(nextSeg.startWord + 1);
+            }}
+            style={{ position:'fixed', right: 8, top: '50%', transform:'translateY(-50%)', padding:'10px 12px', borderRadius:'50%', opacity: segmentIndex>=segments.length-1?0.3:0.9, background:'rgba(0,0,0,0.4)', color:'#fff', border:'1px solid #ffffff33', cursor: segmentIndex>=segments.length-1?'default':'pointer', zIndex:40 }}
+          >▶</button>
+        </>
+      )}
       {isPlaying && (
         <div
           className="rsvp-gesture-area"

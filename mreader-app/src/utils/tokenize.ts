@@ -1,22 +1,27 @@
 import type { Word } from '../types';
 
-// Simple tokenizer and pivot calculator for RSVP
+// Pivot index heuristic reused across loaders / on-demand word source.
+export function computePivotIndex(len: number): number {
+  if (len >= 12) return 4;
+  if (len >= 9) return 3;
+  if (len >= 6) return 2;
+  if (len >= 3) return 1;
+  return 0;
+}
+
+// Basic word normalization: collapse whitespace has already happened before calling.
+export function buildWord(text: string, wpm: number): Word {
+  return {
+    text,
+    pivotIndex: computePivotIndex(text.length),
+    baseDelayMs: 60000 / wpm,
+  };
+}
+
+// Legacy whole-book tokenizer (still exported for migration / single segment cases)
 export function tokenizeWords(text: string, wpm: number = 300): Word[] {
-  const baseDelayMs = 60000 / wpm;
   return text
     .split(/\s+/)
     .filter(Boolean)
-    .map((word) => {
-      const len = word.length;
-      let pivotIndex = 0;
-      if (len >= 3 && len <= 5) pivotIndex = 1;
-      else if (len >= 6 && len <= 8) pivotIndex = 2;
-      else if (len >= 9 && len <= 11) pivotIndex = 3;
-      else if (len >= 12) pivotIndex = 4;
-      return {
-        text: word,
-        pivotIndex,
-        baseDelayMs,
-      };
-    });
+    .map((word) => buildWord(word, wpm));
 }

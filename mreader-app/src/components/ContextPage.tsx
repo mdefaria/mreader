@@ -1,16 +1,19 @@
 import React, { useMemo, useRef, useEffect, useState } from 'react';
 import type { Word } from '../types';
+import type { WordSource, SegmentMeta } from '../types/book';
 
 interface ContextPageProps {
-  words: Word[];
+  wordSource: WordSource | null;
   index: number;
-  pageSize?: number; // optional override; otherwise auto-calculated
+  pageSize?: number; // optional override
   onSelectIndex?: (i: number) => void;
+  segment?: SegmentMeta | null;
+  label?: string;
 }
 
 // Displays a window ("page") of words with the current word highlighted.
-// Simple numeric paging: floor(index / pageSize) chooses the segment.
-export const ContextPage: React.FC<ContextPageProps> = ({ words, index, pageSize, onSelectIndex }) => {
+// Fetches words on demand from a WordSource rather than holding whole array.
+export const ContextPage: React.FC<ContextPageProps> = ({ wordSource, index, pageSize, onSelectIndex, segment, label }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [autoSize, setAutoSize] = useState(200);
 
@@ -56,16 +59,44 @@ export const ContextPage: React.FC<ContextPageProps> = ({ words, index, pageSize
 
   const effectivePageSize = pageSize || autoSize;
 
-  const { pageWords } = useMemo(() => {
-    if (!words.length) return { pageWords: [] as { w: Word; i: number }[] };
+  const { pageWords, pageIndex, totalPages } = useMemo(() => {
+    if (!wordSource) return { pageWords: [] as { w: Word; i: number }[], pageIndex: 0, totalPages: 0 };
+    if (segment) {
+      const segStart = segment.startWord;
+      const rel = Math.max(0, index - segStart);
+      const segWords: { w: Word; i: number }[] = [];
+      for (let i = segStart; i < segStart + segment.wordCount; i++) {
+        const w = wordSource.get(i);
+        if (w) segWords.push({ w, i });
+      }
+      const wordsPerPage = effectivePageSize;
+      const totalPages = Math.max(1, Math.ceil(segWords.length / wordsPerPage));
+      const pageIndex = Math.min(totalPages - 1, Math.floor(rel / wordsPerPage));
+      const pageStart = pageIndex * wordsPerPage;
+      const slice = segWords.slice(pageStart, pageStart + wordsPerPage);
+      return { pageWords: slice, pageIndex, totalPages };
+    }
+    // Fallback legacy whole-book paging
+    const total = wordSource.total();
+    if (!total) return { pageWords: [] as { w: Word; i: number }[], pageIndex: 0, totalPages: 0 };
     const p = Math.floor(index / effectivePageSize);
     const startIdx = p * effectivePageSize;
-    const slice = words.slice(startIdx, Math.min(words.length, startIdx + effectivePageSize));
-    return { pageWords: slice.map((w, offset) => ({ w, i: startIdx + offset })) };
-  }, [words, index, effectivePageSize]);
+    const end = Math.min(total, startIdx + effectivePageSize);
+    const rows: { w: Word; i: number }[] = [];
+    for (let i = startIdx; i < end; i++) {
+      const w = wordSource.get(i);
+      if (w) rows.push({ w, i });
+    }
+    return { pageWords: rows, pageIndex: p, totalPages: Math.ceil(total / effectivePageSize) };
+  }, [wordSource, index, effectivePageSize, segment]);
 
   return (
-    <div className="context-page" ref={containerRef} aria-label="Context page view">
+    <div className="context-page" ref={containerRef} aria-label="Context page view" style={{ position: 'relative' }}>
+      {label && (
+        <div style={{ fontSize: 14, opacity: 0.6, marginBottom: 8 }} aria-label="Segment label">{label} {segment && (
+          <span style={{ fontWeight: 400, fontSize: 12 }}>• Page {pageIndex + 1}/{totalPages}</span>
+        )}</div>
+      )}
       {pageWords.map(({ w, i }) => {
         const isCurrent = i === index;
         return (
