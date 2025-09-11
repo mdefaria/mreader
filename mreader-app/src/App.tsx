@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import './App.css';
 import { tokenizeWords } from './utils/tokenize';
 import { RsvpPlayer } from './components/RsvpPlayer';
+import { ContextPage } from './components/ContextPage';
 import { SettingsModal } from './components/SettingsModal';
 import type { Word, VisualMode } from './types';
 import { loadState, saveState, addBook, listBooks, getBook, updateBookIndex } from './services/persistence';
@@ -165,7 +166,7 @@ function App() {
   if (!bookText) {
     return (
       <div className={`rsvp-app theme-${visualMode}`} style={{ position: 'relative', overflow: 'hidden' }}>
-        <h1 className="rsvp-title">RSVP Reader</h1>
+        <h1 className="rsvp-title">MReader</h1>
         {/* Settings button */}
         <div style={{ position: 'absolute', top: 16, right: 16, zIndex: 20 }}>
           <button
@@ -244,14 +245,16 @@ function App() {
     );
   }
 
-  // RSVP Reader page
+  // RSVP Reader page (hybrid: RSVP while playing; context page while paused)
   return (
-    <div className={`rsvp-app theme-${visualMode}`} style={{ position: 'relative', overflow: 'hidden' }}>
-      <h1 className="rsvp-title">RSVP Reader</h1>
-      <RsvpPlayer word={currentWord} />
-      <div className="rsvp-progress">
-        Word {index + 1} / {words.length}
-      </div>
+    <div className={`rsvp-app theme-${visualMode} ${!isPlaying ? 'is-paused' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
+      {isPlaying ? (
+        <RsvpPlayer word={currentWord} />
+      ) : (
+        <div className="context-wrapper">
+          <ContextPage words={words} index={index} onSelectIndex={(i) => setIndex(i)} />
+        </div>
+      )}
       {/* Library / back button */}
       <div style={{ position: 'fixed', left: 12, top: 12, zIndex: 30 }}>
         <button
@@ -275,27 +278,44 @@ function App() {
           Library
         </button>
       </div>
-      {/* Gesture area: full screen, split logic for top/bottom */}
-      <div
-        className="rsvp-gesture-area"
+      {isPlaying && (
+        <div
+          className="rsvp-gesture-area"
+          style={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: '100vw',
+            height: '100vh',
+            zIndex: 10,
+            cursor: 'pointer',
+            background: 'transparent',
+          }}
+          onClick={handleGesture}
+          onTouchStart={handleGesture}
+          aria-label="Tap top for settings, bottom for play/pause"
+        />
+      )}
+      {/* Play/pause indicator (clickable when paused) */}
+      <button
+        onClick={() => setIsPlaying(p => !p)}
         style={{
           position: 'fixed',
-          left: 0,
-          top: 0,
-          width: '100vw',
-          height: '100vh',
-          zIndex: 10,
+          right: 16,
+          bottom: 16,
+          fontSize: 16,
+          padding: '8px 14px',
+          borderRadius: 20,
+          background: 'rgba(0,0,0,0.35)',
+          color: '#fff',
+          border: '1px solid #ffffff33',
           cursor: 'pointer',
-          background: 'transparent',
+          zIndex: 25
         }}
-        onClick={handleGesture}
-        onTouchStart={handleGesture}
-        aria-label="Tap top for settings, bottom for play/pause"
-      />
-      {/* Play/pause indicator */}
-      <div style={{ position: 'fixed', right: 16, bottom: 16, fontSize: 18, color: '#888', zIndex: 20 }}>
+        aria-label={isPlaying ? 'Pause playback' : 'Start RSVP playback'}
+      >
         {isPlaying ? '⏸️ Pause' : '▶️ Play'}
-      </div>
+      </button>
       {/* Settings modal */}
       {showSettings && (
         <SettingsModal

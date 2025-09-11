@@ -10,8 +10,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'RSVP Reader',
-        short_name: 'RSVP',
+        name: 'MReader',
+        short_name: 'MReader',
         start_url: '/',
         display: 'standalone',
         background_color: '#fff',

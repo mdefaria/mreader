@@ -123,6 +123,11 @@ html, body {
   box-sizing: border-box;
   overflow: hidden;
 }
+.rsvp-app.is-paused {
+  justify-content: flex-start;
+  padding-top: 3.5rem;
+  overflow: hidden; /* internal scroll container will manage scroll */
+}
 
 .rsvp-title {
   margin-bottom: 2rem;
@@ -154,6 +159,66 @@ html, body {
   width: 100vw;
   max-width: 100vw;
   text-align: center;
+}
+
+/* Hybrid context page view */
+.context-page {
+  line-height: 1.6;
+  font-size: clamp(1.02rem, 1.9vw, 1.18rem);
+  text-align: left;
+  max-width: 90ch;
+  margin: 0 auto;
+  user-select: text;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  min-height: 60vh;
+  height: 100%;
+  overflow-wrap: anywhere;
+}
+.context-wrapper {
+  width: 100%;
+  max-width: 90ch;
+  padding: 0 2rem 4rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  height: calc(100vh - 6rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.context-wrapper::-webkit-scrollbar { width: 10px; }
+.context-wrapper::-webkit-scrollbar-track { background: transparent; }
+.context-wrapper::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.35); border-radius: 6px; }
+.theme-night .context-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); }
+.theme-book .context-wrapper::-webkit-scrollbar-thumb { background: rgba(90,70,50,0.35); }
+.context-word {
+  display: inline-block;
+  margin-right: 0.4ch;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s, color 0.15s;
+  padding: 0 2px;
+  border-radius: 4px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.context-word-current {
+  background: var(--context-current-bg, #ffd54f);
+  color: var(--context-current-fg, #000);
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+}
+.theme-night .context-word-current {
+  --context-current-bg: #ffb300;
+  --context-current-fg: #111;
+}
+.theme-book .context-word-current {
+  --context-current-bg: #f2c766;
+  --context-current-fg: #4a3a22;
+}
+.context-word:hover:not(.context-word-current) {
+  background: rgba(128,128,128,0.25);
 }
 #root {
   min-height: 100vh;
