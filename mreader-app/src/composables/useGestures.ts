@@ -23,6 +23,26 @@ export function useGestures(
   const SWIPE_THRESHOLD = 50 // pixels
   const TAP_TIME_THRESHOLD = 300 // ms
 
+  function isInteractiveElement(target: HTMLElement): boolean {
+    // Check if element or any parent is a button, link, or input
+    let current: HTMLElement | null = target
+    while (current && current !== element.value) {
+      const tagName = current.tagName.toLowerCase()
+      if (
+        tagName === 'button' ||
+        tagName === 'a' ||
+        tagName === 'input' ||
+        tagName === 'select' ||
+        tagName === 'textarea' ||
+        (current.hasAttribute('role') && ['button', 'link'].includes(current.getAttribute('role') || ''))
+      ) {
+        return true
+      }
+      current = current.parentElement
+    }
+    return false
+  }
+
   function handleTouchStart(e: TouchEvent) {
     const touch = e.touches[0]
     if (!touch) return
@@ -35,6 +55,12 @@ export function useGestures(
   function handleTouchEnd(e: TouchEvent) {
     const touch = e.changedTouches[0]
     if (!touch) return
+
+    // Check if touch target is an interactive element
+    const target = e.target as HTMLElement
+    if (isInteractiveElement(target)) {
+      return
+    }
 
     const deltaX = touch.clientX - touchStartX.value
     const deltaY = touch.clientY - touchStartY.value
@@ -73,6 +99,12 @@ export function useGestures(
 
   function handleClick(e: MouseEvent) {
     if (!element.value) return
+
+    // Check if click target is an interactive element
+    const target = e.target as HTMLElement
+    if (isInteractiveElement(target)) {
+      return
+    }
 
     const rect = element.value.getBoundingClientRect()
     const relativeY = e.clientY - rect.top

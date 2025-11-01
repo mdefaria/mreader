@@ -33,31 +33,7 @@
       />
     </div>
 
-    <!-- Reader Controls -->
-    <footer class="reader-footer">
-      <div class="controls">
-        <button class="control-button" @click="readerStore.skipBackward(10)" aria-label="Skip backward 10s">
-          ⏪
-        </button>
-        <button class="control-button" @click="readerStore.goToPrevious" aria-label="Previous word">
-          ◀
-        </button>
-        <button class="play-button" @click="readerStore.togglePlayPause" aria-label="Play/Pause">
-          {{ isPlaying ? '⏸' : '▶' }}
-        </button>
-        <button class="control-button" @click="readerStore.goToNext" aria-label="Next word">
-          ▶
-        </button>
-        <button class="control-button" @click="readerStore.skipForward(10)" aria-label="Skip forward 10s">
-          ⏩
-        </button>
-      </div>
 
-      <div class="progress-info">
-        <span>{{ currentIndex + 1 }} / {{ words.length }}</span>
-        <span v-if="timeRemaining > 0">~{{ timeRemaining }} min left</span>
-      </div>
-    </footer>
 
     <!-- Settings Modal -->
     <SettingsModal :is-open="showSettings" @close="handleCloseSettings" />
@@ -113,19 +89,33 @@ useGestures(readerContainer, {
 
 // Navigation handlers
 function handleJumpToWord(index: number) {
-  readerStore.goToWord(index)
+  readerStore.pause()
+  readerStore.currentIndex = Math.max(0, Math.min(index, words.value.length - 1))
+  readerStore.savePosition()
 }
 
 function handlePreviousPage() {
   const wordsPerPage = 100
-  const newIndex = Math.max(0, currentIndex.value - wordsPerPage)
-  readerStore.goToWord(newIndex)
+  // Calculate current page
+  const currentPage = Math.floor(currentIndex.value / wordsPerPage)
+  // Go to start of previous page
+  const newPage = Math.max(0, currentPage - 1)
+  const newIndex = newPage * wordsPerPage
+  readerStore.pause()
+  readerStore.currentIndex = newIndex
+  readerStore.savePosition()
 }
 
 function handleNextPage() {
   const wordsPerPage = 100
-  const newIndex = Math.min(words.value.length - 1, currentIndex.value + wordsPerPage)
-  readerStore.goToWord(newIndex)
+  // Calculate current page
+  const currentPage = Math.floor(currentIndex.value / wordsPerPage)
+  // Go to start of next page
+  const newPage = currentPage + 1
+  const newIndex = Math.min(words.value.length - 1, newPage * wordsPerPage)
+  readerStore.pause()
+  readerStore.currentIndex = newIndex
+  readerStore.savePosition()
 }
 
 function handleCloseSettings() {
@@ -244,72 +234,6 @@ onUnmounted(() => {
   position: relative;
 }
 
-.reader-footer {
-  padding: 1.5rem 2rem;
-  border-top: 1px solid var(--border-color, #e0e0e0);
-  background: var(--bg-primary);
-  z-index: 10;
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.control-button,
-.play-button {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color, #e0e0e0);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-}
-
-.control-button {
-  width: 48px;
-  height: 48px;
-}
-
-.play-button {
-  width: 64px;
-  height: 64px;
-  font-size: 1.5rem;
-  background: var(--accent-color, #ff6b6b);
-  color: white;
-  border: none;
-}
-
-.control-button:hover {
-  background: var(--bg-hover);
-  transform: scale(1.05);
-}
-
-.play-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-}
-
-.control-button:active,
-.play-button:active {
-  transform: scale(0.95);
-}
-
-.progress-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  font-variant-numeric: tabular-nums;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .reader-header {
@@ -319,32 +243,11 @@ onUnmounted(() => {
   .book-title {
     font-size: 1rem;
   }
-
-  .reader-footer {
-    padding: 1rem;
-  }
-
-  .controls {
-    gap: 0.75rem;
-  }
-
-  .control-button {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-
-  .play-button {
-    width: 56px;
-    height: 56px;
-    font-size: 1.25rem;
-  }
 }
 
 /* Print styles */
 @media print {
-  .reader-header,
-  .reader-footer {
+  .reader-header {
     display: none;
   }
 }
