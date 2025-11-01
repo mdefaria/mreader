@@ -79,7 +79,6 @@ npm run preview
 - **Theme**: Choose from Light, Dark, or Book themes
 - **Font**: Select your preferred font family
 - **Font Size**: Adjust text size (12-32px)
-- **Prosody Hints**: Toggle visual indicators for pauses and emphasis
 
 ## 📱 PWA Installation
 

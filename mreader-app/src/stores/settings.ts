@@ -12,10 +12,10 @@ export const useSettingsStore = defineStore('settings', () => {
   const theme = ref<Theme>('light')
   const fontFamily = ref<FontFamily>('system')
   const fontSize = ref(16)
-  const showProsodyHints = ref(true)
   const wpm = ref(250)
   const prosodySensitivity = ref(0.7)
   const autoSave = ref(true)
+  const showPivotHighlight = ref(true)
   const isLoaded = ref(false)
 
   // Load settings from storage
@@ -24,10 +24,10 @@ export const useSettingsStore = defineStore('settings', () => {
     theme.value = settings.theme
     fontFamily.value = settings.fontFamily
     fontSize.value = settings.fontSize
-    showProsodyHints.value = settings.showProsodyHints
     wpm.value = settings.wpm
     prosodySensitivity.value = settings.prosodySensitivity
     autoSave.value = settings.autoSave
+    showPivotHighlight.value = settings.showPivotHighlight ?? true
     isLoaded.value = true
     
     // Apply theme to document
@@ -40,10 +40,10 @@ export const useSettingsStore = defineStore('settings', () => {
       theme: theme.value,
       fontFamily: fontFamily.value,
       fontSize: fontSize.value,
-      showProsodyHints: showProsodyHints.value,
       wpm: wpm.value,
       prosodySensitivity: prosodySensitivity.value,
       autoSave: autoSave.value,
+      showPivotHighlight: showPivotHighlight.value,
     }
     await storage.setUserSettings(settings)
   }
@@ -100,15 +100,15 @@ export const useSettingsStore = defineStore('settings', () => {
     if (autoSave.value) saveSettings()
   }
 
-  // Toggle prosody hints
-  function toggleProsodyHints() {
-    showProsodyHints.value = !showProsodyHints.value
+  // Update pivot highlight setting
+  function setShowPivotHighlight(show: boolean) {
+    showPivotHighlight.value = show
     if (autoSave.value) saveSettings()
   }
 
   // Auto-save on changes
   watch(
-    [theme, fontFamily, fontSize, wpm, prosodySensitivity, showProsodyHints],
+    [theme, fontFamily, fontSize, wpm, prosodySensitivity, showPivotHighlight],
     () => {
       if (isLoaded.value && autoSave.value) {
         saveSettings()
@@ -121,10 +121,10 @@ export const useSettingsStore = defineStore('settings', () => {
     theme,
     fontFamily,
     fontSize,
-    showProsodyHints,
     wpm,
     prosodySensitivity,
     autoSave,
+    showPivotHighlight,
     isLoaded,
     
     // Actions
@@ -135,7 +135,7 @@ export const useSettingsStore = defineStore('settings', () => {
     setFontSize,
     setWpm,
     setProsodySensitivity,
-    toggleProsodyHints,
+    setShowPivotHighlight,
     applyTheme,
   }
 })

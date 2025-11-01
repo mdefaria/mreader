@@ -40,10 +40,10 @@ export interface UserSettings {
   theme: Theme
   fontFamily: FontFamily
   fontSize: number
-  showProsodyHints: boolean
   wpm: number
   prosodySensitivity: number
   autoSave: boolean
+  showPivotHighlight: boolean
 }
 
 export interface ReaderState {

@@ -100,16 +100,19 @@
               </div>
             </div>
 
-            <!-- Toggle Options -->
+            <!-- Pivot Highlight Toggle -->
             <div class="setting-group">
               <label class="checkbox-label">
                 <input
                   type="checkbox"
-                  :checked="localShowProsodyHints"
-                  @change="toggleProsodyHints"
+                  :checked="localShowPivotHighlight"
+                  @change="updateShowPivotHighlight"
                 />
-                <span>Show prosody hints</span>
+                <span>Show Pivot Letter Highlight</span>
               </label>
+              <p class="setting-description">
+                When enabled, the pivot letter is centered and highlighted. When disabled, the entire word is centered.
+              </p>
             </div>
           </div>
 
@@ -144,7 +147,7 @@ const localProsodySensitivity = ref(settingsStore.prosodySensitivity)
 const localTheme = ref(settingsStore.theme)
 const localFontFamily = ref(settingsStore.fontFamily)
 const localFontSize = ref(settingsStore.fontSize)
-const localShowProsodyHints = ref(settingsStore.showProsodyHints)
+const localShowPivotHighlight = ref(settingsStore.showPivotHighlight)
 
 // Options
 const themes: Theme[] = ['light', 'dark', 'book']
@@ -186,9 +189,10 @@ function updateFontSize(event: Event) {
   settingsStore.setFontSize(value)
 }
 
-function toggleProsodyHints() {
-  localShowProsodyHints.value = !localShowProsodyHints.value
-  settingsStore.toggleProsodyHints()
+function updateShowPivotHighlight(event: Event) {
+  const value = (event.target as HTMLInputElement).checked
+  localShowPivotHighlight.value = value
+  settingsStore.setShowPivotHighlight(value)
 }
 
 function closeModal() {
@@ -217,8 +221,8 @@ watch(
   (value) => (localFontSize.value = value)
 )
 watch(
-  () => settingsStore.showProsodyHints,
-  (value) => (localShowProsodyHints.value = value)
+  () => settingsStore.showPivotHighlight,
+  (value) => (localShowPivotHighlight.value = value)
 )
 </script>
 
@@ -407,6 +411,14 @@ watch(
   height: 20px;
   cursor: pointer;
   accent-color: var(--accent-color, #ff6b6b);
+}
+
+.setting-description {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  font-weight: 400;
 }
 
 .modal-footer {

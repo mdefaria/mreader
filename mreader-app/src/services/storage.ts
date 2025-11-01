@@ -100,10 +100,10 @@ class StorageService {
       theme: 'light',
       fontFamily: 'system',
       fontSize: 16,
-      showProsodyHints: true,
       wpm: 250,
       prosodySensitivity: 0.7,
       autoSave: true,
+      showPivotHighlight: true,
     }
 
     return settings ? { ...defaults, ...settings } : defaults

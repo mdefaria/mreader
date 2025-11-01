@@ -1,21 +1,16 @@
 <template>
-  <div class="rsvp-display" :class="{ 'has-prosody': showProsodyHints && currentWord?.prosody }">
+  <div class="rsvp-display">
     <div v-if="currentWord" class="word-container">
-      <!-- Word with pivot highlighting -->
-      <div class="word">
-        <span class="before-pivot">{{ beforePivot }}</span>
-        <span class="pivot">{{ pivotChar }}</span>
-        <span class="after-pivot">{{ afterPivot }}</span>
+      <!-- Word with pivot alignment -->
+      <div v-if="showPivotHighlight" class="word pivot-mode">
+        <div class="pivot-wrapper">
+          <span class="word-part before-pivot">{{ beforePivot }}</span><!--
+       --><span class="word-part pivot">{{ pivotChar }}</span><!--
+       --><span class="word-part after-pivot">{{ afterPivot }}</span>
+        </div>
       </div>
-
-      <!-- Prosody indicator -->
-      <div v-if="showProsodyHints && currentWord.prosody" class="prosody-hint">
-        <span v-if="currentWord.prosody.pause && currentWord.prosody.pause > 1.3" class="pause-indicator">
-          {{ '·'.repeat(Math.min(3, Math.ceil(currentWord.prosody.pause))) }}
-        </span>
-        <span v-if="currentWord.prosody.emphasis" class="emphasis-indicator" :data-emphasis="currentWord.prosody.emphasis">
-          {{ currentWord.prosody.emphasis === 'high' ? '!' : currentWord.prosody.emphasis === 'medium' ? '·' : '' }}
-        </span>
+      <div v-else class="word">
+        <span class="full-word">{{ currentWord.text }}</span>
       </div>
 
       <!-- Progress indicator -->
@@ -32,19 +27,23 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useSettingsStore } from '@/stores/settings'
 import type { Word } from '@/types'
 
 interface Props {
   currentWord: Word | null
   progress: number
-  showProsodyHints?: boolean
   isComplete?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  showProsodyHints: true,
   isComplete: false,
 })
+
+const settingsStore = useSettingsStore()
+
+// Get pivot highlight setting
+const showPivotHighlight = computed(() => settingsStore.showPivotHighlight)
 
 // Split word at pivot point
 const beforePivot = computed(() => {
@@ -81,54 +80,66 @@ const afterPivot = computed(() => {
 .word {
   font-size: clamp(2rem, 8vw, 4rem);
   font-weight: 500;
-  text-align: center;
   letter-spacing: 0.02em;
   line-height: 1.4;
-  transition: opacity 0.1s ease;
   color: var(--text-primary);
-}
-
-.before-pivot,
-.after-pivot {
-  opacity: 0.9;
-}
-
-.pivot {
-  color: var(--accent-color, #ff6b6b);
-  font-weight: 700;
+  text-align: center;
+  min-height: 1.4em;
   position: relative;
-}
-
-.pivot::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent-color, #ff6b6b);
-  opacity: 0.5;
-}
-
-.prosody-hint {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  min-height: 1.5rem;
-  color: var(--text-secondary);
-  font-size: 1.5rem;
-  opacity: 0.6;
 }
 
-.pause-indicator {
-  letter-spacing: 0.2em;
+/* Pivot mode - align pivot letter to center with fixed positioning */
+.word.pivot-mode {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 1.4em;
 }
 
-.emphasis-indicator[data-emphasis='high'] {
+.pivot-wrapper {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.word.pivot-mode .word-part {
+  display: inline-block;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+}
+
+.word.pivot-mode .before-pivot {
+  opacity: 0.9;
+  right: 100%;
+  text-align: right;
+}
+
+.word.pivot-mode .pivot {
   color: var(--accent-color, #ff6b6b);
-  font-weight: bold;
+  font-weight: 700;
+  border-bottom: 3px solid var(--accent-color, #ff6b6b);
+  padding-bottom: 2px;
+  position: relative;
+  left: 0;
+  z-index: 1;
+}
+
+.word.pivot-mode .after-pivot {
+  opacity: 0.9;
+  left: 100%;
+  text-align: left;
+}
+
+/* Full word mode - simple centered text */
+.full-word {
+  text-align: center;
+  display: block;
 }
 
 .progress-bar {

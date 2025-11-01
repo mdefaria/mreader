@@ -18,7 +18,6 @@
         v-if="isPlaying"
         :current-word="currentWord"
         :progress="progress"
-        :show-prosody-hints="showProsodyHints"
         :is-complete="isComplete"
       />
 
@@ -100,7 +99,6 @@ const isPlaying = computed(() => readerStore.isPlaying)
 const progress = computed(() => readerStore.progress)
 const isComplete = computed(() => readerStore.isComplete)
 const timeRemaining = computed(() => readerStore.timeRemaining)
-const showProsodyHints = computed(() => settingsStore.showProsodyHints)
 
 // Gesture handlers
 useGestures(readerContainer, {
