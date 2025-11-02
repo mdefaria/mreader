@@ -27,6 +27,8 @@ A minimalist offline-capable RSVP (Rapid Serial Visual Presentation) speed reade
   - Up/Down arrows: Adjust WPM
   - Esc: Pause/Close settings
 - ✅ **PWA Ready**: Installable with offline support
+- ✅ **Update Mechanism**: Automatic update detection with manual refresh for iOS compatibility
+- ✅ **Version Display**: Current app version visible in the library
 
 ### Coming Soon
 - 📱 EPUB support via epub.js
@@ -90,6 +92,8 @@ npm run preview
 1. Tap the Share button
 2. Select "Add to Home Screen"
 
+**Note**: iOS PWAs check for updates every hour. When an update is available, you'll see a notification at the bottom of the screen with options to update now or later.
+
 ### Mobile (Android Chrome)
 1. Tap the menu (⋮)
 2. Select "Add to Home Screen"
@@ -102,6 +106,17 @@ The app supports three built-in themes:
 - **Book**: Sepia/cream tones for a book-like experience
 
 Themes use CSS variables for easy customization.
+
+## 🔄 PWA Updates
+
+The app includes an intelligent update mechanism optimized for iOS:
+
+- **Automatic Detection**: Checks for updates every hour
+- **Manual Refresh**: When an update is available, you'll see a prompt to update
+- **Version Display**: Current version shown in bottom-right corner of the library
+- **User Control**: Choose to update immediately or continue reading and update later
+
+For more details, see [PWA Update Mechanism](docs/PWA_UPDATE_MECHANISM.md).
 
 ## 🔧 Development
 
