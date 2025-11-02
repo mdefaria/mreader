@@ -221,4 +221,35 @@ async function processFile(file: File) {
     font-size: 1.25rem;
   }
 }
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .book-uploader {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .book-uploader h3 {
+    font-size: 1.125rem;
+    margin: 0 0 0.375rem;
+  }
+
+  .book-uploader p {
+    font-size: 0.875rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .browse-button {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .error-message {
+    font-size: 0.8125rem;
+  }
+}
 </style>

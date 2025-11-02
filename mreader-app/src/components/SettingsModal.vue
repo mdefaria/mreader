@@ -491,4 +491,58 @@ watch(
     width: 100%;
   }
 }
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .modal-body {
+    padding: 0.75rem;
+  }
+
+  .modal-footer {
+    padding: 1rem;
+  }
+
+  .setting-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .setting-group label {
+    font-size: 0.875rem;
+  }
+
+  .slider-value {
+    min-width: 3rem;
+    font-size: 0.875rem;
+  }
+
+  .slider-labels {
+    font-size: 0.75rem;
+  }
+
+  .option-button {
+    min-width: 60px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .setting-description {
+    font-size: 0.8rem;
+  }
+
+  .primary-button {
+    font-size: 0.9375rem;
+  }
+}
 </style>
