@@ -13,9 +13,19 @@
 
     <!-- Main Reading Area -->
     <div class="reader-content">
+      <!-- Scrubbing Display (during long press) -->
+      <ScrubbingDisplay
+        v-if="isScrubbing"
+        :surrounding-words="surroundingWords"
+        :current-index="currentIndex"
+        :total-words="words.length"
+        :progress="progress"
+        :direction="scrubbingDirection"
+      />
+
       <!-- RSVP Display (when playing) -->
       <RsvpDisplay
-        v-if="isPlaying"
+        v-else-if="isPlaying"
         :current-word="currentWord"
         :progress="progress"
         :is-complete="isComplete"
@@ -46,6 +56,7 @@ import { useGestures } from '@/composables/useGestures'
 import RsvpDisplay from '@/components/RsvpDisplay.vue'
 import ContextPage from '@/components/ContextPage.vue'
 import SettingsModal from '@/components/SettingsModal.vue'
+import ScrubbingDisplay from '@/components/ScrubbingDisplay.vue'
 
 interface Props {
   bookId: string
@@ -62,6 +73,7 @@ const libraryStore = useLibraryStore()
 
 const showSettings = ref(false)
 const readerContainer = ref<HTMLElement | null>(null)
+const scrubbingDirection = ref<'forward' | 'backward'>('forward')
 
 // Computed properties
 const currentBook = computed(() => readerStore.currentBook)
@@ -69,10 +81,86 @@ const currentWord = computed(() => readerStore.currentWord)
 const words = computed(() => readerStore.words)
 const currentIndex = computed(() => readerStore.currentIndex)
 const isPlaying = computed(() => readerStore.isPlaying)
+const isScrubbing = computed(() => readerStore.isScrubbing)
 const progress = computed(() => readerStore.progress)
 const isComplete = computed(() => readerStore.isComplete)
+const surroundingWords = computed(() => readerStore.getSurroundingWords(2))
+
+// Calculate speed multiplier based on position relative to center
+function calculateSpeedMultiplier(x: number, screenWidth: number, isLeft: boolean): number {
+  const center = screenWidth / 2
+  const edgeDistance = isLeft ? center : screenWidth - center
+  const distanceFromCenter = Math.abs(x - center)
+  
+  // Normalize distance from center (0 at center, 1 at edge)
+  const normalizedDistance = Math.min(distanceFromCenter / edgeDistance, 1)
+  
+  // Map to speed multiplier: 1x at center, up to 2x at edge
+  // Using a quadratic curve for smoother feel
+  return 1 + (normalizedDistance * normalizedDistance)
+}
 
 // Gesture handlers
+function handleLongPressStart(x: number, _y: number) {
+  // Only allow scrubbing when playing
+  if (!isPlaying.value) return
+
+  const rect = readerContainer.value?.getBoundingClientRect()
+  if (!rect) return
+
+  const screenWidth = rect.width
+  const centerX = screenWidth / 2
+
+  // Determine direction based on which side of screen was pressed
+  if (x < centerX) {
+    scrubbingDirection.value = 'backward'
+  } else {
+    scrubbingDirection.value = 'forward'
+  }
+
+  // Calculate initial speed multiplier
+  const speedMultiplier = calculateSpeedMultiplier(x, screenWidth, x < centerX)
+
+  // Start scrubbing
+  readerStore.startScrubbing(scrubbingDirection.value, speedMultiplier)
+}
+
+function handleLongPressMove(x: number, _y: number) {
+  if (!isScrubbing.value) return
+
+  const rect = readerContainer.value?.getBoundingClientRect()
+  if (!rect) return
+
+  const screenWidth = rect.width
+  const centerX = screenWidth / 2
+
+  // Update direction if crossed center
+  const newDirection: 'forward' | 'backward' = x < centerX ? 'backward' : 'forward'
+  
+  if (newDirection !== scrubbingDirection.value) {
+    scrubbingDirection.value = newDirection
+    readerStore.stopScrubbing()
+    
+    const speedMultiplier = calculateSpeedMultiplier(x, screenWidth, x < centerX)
+    readerStore.startScrubbing(scrubbingDirection.value, speedMultiplier)
+  } else {
+    // Update speed based on position
+    const speedMultiplier = calculateSpeedMultiplier(x, screenWidth, x < centerX)
+    
+    // Restart scrubbing with new speed
+    readerStore.stopScrubbing()
+    readerStore.startScrubbing(scrubbingDirection.value, speedMultiplier)
+  }
+}
+
+function handleLongPressEnd() {
+  if (isScrubbing.value) {
+    readerStore.stopScrubbing()
+    // Resume playback
+    readerStore.play()
+  }
+}
+
 useGestures(readerContainer, {
   onTap: () => {
     // When playing, any tap toggles play/pause
@@ -83,6 +171,9 @@ useGestures(readerContainer, {
       readerStore.play()
     }
   },
+  onLongPressStart: handleLongPressStart,
+  onLongPressMove: handleLongPressMove,
+  onLongPressEnd: handleLongPressEnd,
 })
 
 // Navigation handlers
