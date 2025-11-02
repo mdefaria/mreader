@@ -54,25 +54,32 @@ const pageContainer = ref<HTMLElement | null>(null)
 const textContainer = ref<HTMLElement | null>(null)
 const calculatedWordsPerPage = ref(props.wordsPerPage)
 
+// Constants for word calculation
+const AVG_CHARS_PER_WORD = 6 // Average word length including space
+const CHAR_WIDTH_RATIO = 0.6 // Estimated ratio of character width to font size
+const MIN_WORDS_PER_PAGE = 150 // Minimum words to show per page
+
 // Calculate optimal words per page based on available height
 const calculateWordsPerPage = () => {
-  if (!textContainer.value || !pageContainer.value) return
+  if (!textContainer.value || !pageContainer.value) {
+    // Use fallback if DOM is not ready
+    calculatedWordsPerPage.value = props.wordsPerPage
+    return
+  }
 
   const containerHeight = textContainer.value.clientHeight
   const lineHeight = parseFloat(getComputedStyle(textContainer.value).lineHeight)
   const fontSize = parseFloat(getComputedStyle(textContainer.value).fontSize)
   
-  // Estimate average characters per word (including space)
-  const avgCharsPerWord = 6
   const containerWidth = textContainer.value.clientWidth
-  const charsPerLine = Math.floor(containerWidth / (fontSize * 0.6))
-  const wordsPerLine = Math.floor(charsPerLine / avgCharsPerWord)
+  const charsPerLine = Math.floor(containerWidth / (fontSize * CHAR_WIDTH_RATIO))
+  const wordsPerLine = Math.floor(charsPerLine / AVG_CHARS_PER_WORD)
   
   // Calculate how many lines fit in the container
   const linesPerPage = Math.floor(containerHeight / lineHeight)
   
-  // Calculate total words that fit in the page
-  const estimatedWords = Math.max(150, wordsPerLine * linesPerPage)
+  // Calculate total words that fit in the page (with minimum threshold)
+  const estimatedWords = Math.max(MIN_WORDS_PER_PAGE, wordsPerLine * linesPerPage)
   calculatedWordsPerPage.value = estimatedWords
 }
 
