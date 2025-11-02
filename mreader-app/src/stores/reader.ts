@@ -17,6 +17,8 @@ export const useReaderStore = defineStore('reader', () => {
   const isPlaying = ref(false)
   const playbackTimer = ref<number | null>(null)
   const lastPlayTime = ref<number>(0)
+  const isScrubbing = ref(false)
+  const scrubbingTimer = ref<number | null>(null)
 
   // Get stores
   const libraryStore = useLibraryStore()
@@ -221,12 +223,68 @@ export const useReaderStore = defineStore('reader', () => {
     }
   })
 
+  // Scrubbing (fast forward/backward navigation)
+  function startScrubbing(direction: 'forward' | 'backward', speedMultiplier: number = 1.5) {
+    // Pause normal playback if playing
+    if (isPlaying.value) {
+      pause()
+    }
+
+    isScrubbing.value = true
+
+    // Calculate delay based on current WPM and speed multiplier
+    const baseDelay = 60000 / settingsStore.wpm
+    const scrubbingDelay = baseDelay / speedMultiplier
+
+    // Use RAF for smooth scrubbing
+    let lastScrubbingTime = performance.now()
+
+    const scrubLoop = () => {
+      if (!isScrubbing.value) return
+
+      const now = performance.now()
+      const elapsed = now - lastScrubbingTime
+
+      if (elapsed >= scrubbingDelay) {
+        // Move index
+        if (direction === 'forward') {
+          currentIndex.value = Math.min(currentIndex.value + 1, words.value.length - 1)
+        } else {
+          currentIndex.value = Math.max(currentIndex.value - 1, 0)
+        }
+
+        lastScrubbingTime = now
+      }
+
+      scrubbingTimer.value = requestAnimationFrame(scrubLoop)
+    }
+
+    scrubLoop()
+  }
+
+  function stopScrubbing() {
+    isScrubbing.value = false
+    if (scrubbingTimer.value !== null) {
+      cancelAnimationFrame(scrubbingTimer.value)
+      scrubbingTimer.value = null
+    }
+    savePosition()
+  }
+
+  // Get surrounding words for context display during scrubbing
+  function getSurroundingWords(count: number = 2): Word[] {
+    const start = Math.max(0, currentIndex.value - count)
+    const end = Math.min(words.value.length, currentIndex.value + count + 1)
+    return words.value.slice(start, end)
+  }
+
   return {
     // State
     currentBook,
     words,
     currentIndex,
     isPlaying,
+    isScrubbing,
 
     // Computed
     currentWord,
@@ -248,5 +306,8 @@ export const useReaderStore = defineStore('reader', () => {
     skipBackward,
     restart,
     savePosition,
+    startScrubbing,
+    stopScrubbing,
+    getSurroundingWords,
   }
 })
