@@ -74,7 +74,6 @@ const currentIndex = computed(() => readerStore.currentIndex)
 const isPlaying = computed(() => readerStore.isPlaying)
 const progress = computed(() => readerStore.progress)
 const isComplete = computed(() => readerStore.isComplete)
-const timeRemaining = computed(() => readerStore.timeRemaining)
 
 // Gesture handlers
 useGestures(readerContainer, {
