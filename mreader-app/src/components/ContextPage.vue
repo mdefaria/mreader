@@ -1,6 +1,6 @@
 <template>
-  <div class="context-page">
-    <div class="context-text">
+  <div ref="pageContainer" class="context-page">
+    <div ref="textContainer" class="context-text">
       <span
         v-for="(word, index) in visibleWords"
         :key="startIndex + index"
@@ -17,13 +17,13 @@
     </div>
 
     <div class="context-controls">
-      <button @click="$emit('previous-page')" :disabled="startIndex === 0" class="nav-button">
+      <button @click="handlePreviousPage" :disabled="startIndex === 0" class="nav-button">
         ← Previous
       </button>
       <div class="page-info">
-        {{ Math.floor(currentIndex / wordsPerPage) + 1 }} / {{ totalPages }}
+        {{ Math.floor(currentIndex / calculatedWordsPerPage) + 1 }} / {{ totalPages }}
       </div>
-      <button @click="$emit('next-page')" :disabled="endIndex >= totalWords" class="nav-button">
+      <button @click="handleNextPage" :disabled="endIndex >= totalWords" class="nav-button">
         Next →
       </button>
     </div>
@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import type { Word } from '@/types'
 
 interface Props {
@@ -44,30 +44,85 @@ const props = withDefaults(defineProps<Props>(), {
   wordsPerPage: 100,
 })
 
-defineEmits<{
+const emit = defineEmits<{
   'jump-to-word': [index: number]
   'previous-page': []
   'next-page': []
 }>()
 
+const pageContainer = ref<HTMLElement | null>(null)
+const textContainer = ref<HTMLElement | null>(null)
+const calculatedWordsPerPage = ref(props.wordsPerPage)
+
+// Calculate optimal words per page based on available height
+const calculateWordsPerPage = () => {
+  if (!textContainer.value || !pageContainer.value) return
+
+  const containerHeight = textContainer.value.clientHeight
+  const lineHeight = parseFloat(getComputedStyle(textContainer.value).lineHeight)
+  const fontSize = parseFloat(getComputedStyle(textContainer.value).fontSize)
+  
+  // Estimate average characters per word (including space)
+  const avgCharsPerWord = 6
+  const containerWidth = textContainer.value.clientWidth
+  const charsPerLine = Math.floor(containerWidth / (fontSize * 0.6))
+  const wordsPerLine = Math.floor(charsPerLine / avgCharsPerWord)
+  
+  // Calculate how many lines fit in the container
+  const linesPerPage = Math.floor(containerHeight / lineHeight)
+  
+  // Calculate total words that fit in the page
+  const estimatedWords = Math.max(150, wordsPerLine * linesPerPage)
+  calculatedWordsPerPage.value = estimatedWords
+}
+
+// Recalculate on window resize
+const handleResize = () => {
+  calculateWordsPerPage()
+}
+
+onMounted(() => {
+  calculateWordsPerPage()
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
 const totalWords = computed(() => props.words.length)
 
 const totalPages = computed(() => 
-  Math.ceil(totalWords.value / props.wordsPerPage)
+  Math.ceil(totalWords.value / calculatedWordsPerPage.value)
 )
 
 const startIndex = computed(() => {
-  const page = Math.floor(props.currentIndex / props.wordsPerPage)
-  return page * props.wordsPerPage
+  const page = Math.floor(props.currentIndex / calculatedWordsPerPage.value)
+  return page * calculatedWordsPerPage.value
 })
 
 const endIndex = computed(() => {
-  return Math.min(startIndex.value + props.wordsPerPage, totalWords.value)
+  return Math.min(startIndex.value + calculatedWordsPerPage.value, totalWords.value)
 })
 
 const visibleWords = computed(() => {
   return props.words.slice(startIndex.value, endIndex.value)
 })
+
+// Handle page navigation
+function handlePreviousPage() {
+  const currentPage = Math.floor(props.currentIndex / calculatedWordsPerPage.value)
+  const newPage = Math.max(0, currentPage - 1)
+  const newIndex = newPage * calculatedWordsPerPage.value
+  emit('jump-to-word', newIndex)
+}
+
+function handleNextPage() {
+  const currentPage = Math.floor(props.currentIndex / calculatedWordsPerPage.value)
+  const newPage = currentPage + 1
+  const newIndex = Math.min(totalWords.value - 1, newPage * calculatedWordsPerPage.value)
+  emit('jump-to-word', newIndex)
+}
 </script>
 
 <style scoped>
@@ -87,6 +142,11 @@ const visibleWords = computed(() => {
   font-family: var(--font-family);
   color: var(--text-primary);
   padding-bottom: 2rem;
+  text-align: justify;
+  text-justify: inter-word;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .word {
@@ -167,11 +227,22 @@ const visibleWords = computed(() => {
   .context-text {
     font-size: 0.95rem;
     line-height: 1.7;
+    padding-bottom: 1rem;
   }
 
   .nav-button {
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .context-page {
+    padding: 3rem 4rem;
+  }
+  
+  .context-text {
+    line-height: 2;
   }
 }
 </style>
