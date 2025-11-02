@@ -4,9 +4,10 @@
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Book } from '@/types'
+import type { Book, BookFormat } from '@/types'
 import { storage } from '@/services/storage'
 import { extractTitle, countWords } from '@/utils/tokenize'
+import { parseEpubFile, isEpubFile } from '@/utils/epub-parser'
 
 export const useLibraryStore = defineStore('library', () => {
   // State
@@ -65,12 +66,18 @@ export const useLibraryStore = defineStore('library', () => {
   }
 
   // Add a new book
-  async function addBook(content: string, title?: string, author?: string): Promise<Book> {
+  async function addBook(
+    content: string,
+    format: BookFormat,
+    title?: string,
+    author?: string
+  ): Promise<Book> {
     const book: Book = {
       id: crypto.randomUUID(),
       title: title || extractTitle(content),
       author,
       content,
+      format,
       lastPosition: 0,
       totalWords: countWords(content),
       addedAt: new Date(),
@@ -84,9 +91,18 @@ export const useLibraryStore = defineStore('library', () => {
 
   // Import book from file
   async function importBookFromFile(file: File): Promise<Book> {
+    // Check if it's an EPUB file
+    if (isEpubFile(file)) {
+      const { content, metadata } = await parseEpubFile(file)
+      const title = metadata.title || file.name.replace(/\.epub$/i, '')
+      const author = metadata.creator
+      return addBook(content, 'epub', title, author)
+    }
+
+    // Otherwise treat as plain text
     const content = await file.text()
     const title = file.name.replace(/\.(txt|md)$/i, '')
-    return addBook(content, title)
+    return addBook(content, 'txt', title)
   }
 
   // Update book

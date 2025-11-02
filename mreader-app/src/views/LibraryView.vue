@@ -23,7 +23,10 @@
           @click="openBook(book.id)"
         >
           <div class="book-info">
-            <h3 class="book-title">{{ book.title }}</h3>
+            <h3 class="book-title">
+              {{ book.title }}
+              <span v-if="book.format === 'epub'" class="format-badge">EPUB</span>
+            </h3>
             <p v-if="book.author" class="book-author">{{ book.author }}</p>
             <div class="book-meta">
               <span>{{ book.totalWords.toLocaleString() }} words</span>
@@ -203,6 +206,22 @@ async function deleteBook() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.format-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  background: var(--accent-color, #ff6b6b);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
 }
 
 .book-author {

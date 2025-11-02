@@ -9,11 +9,11 @@
     <div class="upload-content">
       <div class="upload-icon">📚</div>
       <h3>Add a Book</h3>
-      <p>Drag and drop a text file here, or click to browse</p>
+      <p>Drag and drop a text or EPUB file here, or click to browse</p>
       <input
         ref="fileInput"
         type="file"
-        accept=".txt,.md"
+        accept=".txt,.md,.epub"
         @change="handleFileSelect"
         class="file-input"
       />
@@ -43,8 +43,9 @@ const isUploading = ref(false)
 const error = ref('')
 const fileInput = ref<HTMLInputElement | null>(null)
 
-const ACCEPTED_TYPES = ['text/plain', 'text/markdown']
-const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
+const ACCEPTED_TYPES = ['text/plain', 'text/markdown', 'application/epub+zip']
+const ACCEPTED_EXTENSIONS = /\.(txt|md|epub)$/i
+const MAX_FILE_SIZE = 50 * 1024 * 1024 // 50MB (EPUB files can be larger)
 
 function openFilePicker() {
   fileInput.value?.click()
@@ -70,14 +71,14 @@ async function processFile(file: File) {
   error.value = ''
 
   // Validate file type
-  if (!ACCEPTED_TYPES.includes(file.type) && !file.name.match(/\.(txt|md)$/i)) {
-    error.value = 'Please upload a .txt or .md file'
+  if (!ACCEPTED_TYPES.includes(file.type) && !ACCEPTED_EXTENSIONS.test(file.name)) {
+    error.value = 'Please upload a .txt, .md, or .epub file'
     return
   }
 
   // Validate file size
   if (file.size > MAX_FILE_SIZE) {
-    error.value = 'File is too large. Maximum size is 10MB'
+    error.value = 'File is too large. Maximum size is 50MB'
     return
   }
 
