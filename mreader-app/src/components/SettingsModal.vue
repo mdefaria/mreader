@@ -475,12 +475,28 @@ watch(
     max-height: 95vh;
   }
 
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.25rem;
+  }
+
   .modal-body {
+    padding: 1rem;
+  }
+
+  .modal-footer {
     padding: 1rem;
   }
 
   .setting-group {
     margin-bottom: 1.5rem;
+  }
+
+  .setting-group label {
+    font-size: 0.9rem;
   }
 
   .button-group {
@@ -489,6 +505,87 @@ watch(
 
   .option-button {
     width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    max-height: 96vh;
+    border-radius: 8px;
+  }
+
+  .modal-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.125rem;
+  }
+
+  .close-button {
+    font-size: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .modal-body {
+    padding: 0.75rem 1rem;
+  }
+
+  .modal-footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .setting-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .setting-group label {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .slider-container {
+    gap: 0.5rem;
+  }
+
+  .slider-value {
+    min-width: 3rem;
+    font-size: 0.875rem;
+  }
+
+  .slider-labels {
+    font-size: 0.75rem;
+  }
+
+  .option-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .setting-description {
+    font-size: 0.8rem;
+    margin-top: 0.375rem;
+  }
+
+  .checkbox-label {
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .checkbox-label input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+  }
+
+  .primary-button {
+    padding: 0.625rem;
+    font-size: 0.9375rem;
   }
 }
 </style>

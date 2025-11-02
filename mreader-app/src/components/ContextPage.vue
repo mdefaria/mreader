@@ -165,13 +165,46 @@ const visibleWords = computed(() => {
   }
 
   .context-text {
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
     line-height: 1.7;
+    padding-bottom: 1.5rem;
   }
 
   .nav-button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  .page-info {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .context-page {
+    padding: 0.75rem;
+  }
+
+  .context-text {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    padding-bottom: 1rem;
+  }
+
+  .context-controls {
+    padding: 0.75rem 0;
+    gap: 0.75rem;
+  }
+
+  .nav-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .page-info {
+    font-size: 0.8125rem;
   }
 }
 </style>

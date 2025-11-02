@@ -236,11 +236,49 @@ onUnmounted(() => {
 /* Responsive */
 @media (max-width: 768px) {
   .reader-header {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .book-title {
     font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .back-button,
+  .settings-button {
+    font-size: 1rem;
+    padding: 0.375rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reader-header {
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .book-title {
+    font-size: 0.875rem;
+    padding: 0 0.25rem;
+  }
+
+  .back-button,
+  .settings-button {
+    font-size: 0.9rem;
+    padding: 0.375rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .back-button {
+    flex-shrink: 0;
+  }
+
+  .settings-button {
+    flex-shrink: 0;
   }
 }
 

@@ -324,11 +324,12 @@ async function deleteBook() {
 /* Responsive */
 @media (max-width: 768px) {
   .library-header {
-    padding: 1rem;
+    padding: 1.25rem 1rem;
   }
 
   .library-header h1 {
     font-size: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .library-content {
@@ -337,6 +338,91 @@ async function deleteBook() {
 
   .books-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .book-card {
+    padding: 1.25rem;
+  }
+
+  .book-title {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .library-header {
+    padding: 1rem 0.75rem;
+  }
+
+  .library-header h1 {
+    font-size: 1.375rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .search-input {
+    max-width: 100%;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9375rem;
+  }
+
+  .library-content {
+    padding: 0.75rem;
+  }
+
+  .books-grid {
+    gap: 0.875rem;
+  }
+
+  .book-card {
+    padding: 1rem;
+  }
+
+  .book-title {
+    font-size: 1.0625rem;
+  }
+
+  .book-author {
+    font-size: 0.875rem;
+  }
+
+  .book-meta {
+    font-size: 0.8125rem;
+    gap: 0.75rem;
+  }
+
+  .action-button {
+    font-size: 1.125rem;
+    padding: 0.375rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .add-more-button {
+    padding: 0.875rem;
+    font-size: 0.9375rem;
+  }
+
+  .confirm-dialog {
+    padding: 1.5rem;
+    max-width: 320px;
+  }
+
+  .confirm-dialog h3 {
+    font-size: 1.25rem;
+  }
+
+  .confirm-dialog p {
+    font-size: 0.9375rem;
+  }
+
+  .cancel-button,
+  .delete-button {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9375rem;
   }
 }
 </style>

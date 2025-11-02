@@ -172,7 +172,39 @@ const afterPivot = computed(() => {
   }
 
   .word {
-    font-size: clamp(1.5rem, 10vw, 3rem);
+    font-size: clamp(1.75rem, 10vw, 3rem);
+  }
+
+  .progress-bar {
+    margin-top: 1.5rem;
+  }
+
+  .no-word {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rsvp-display {
+    min-height: 180px;
+    padding: 0.75rem;
+  }
+
+  .word {
+    font-size: clamp(1.5rem, 12vw, 2.5rem);
+  }
+
+  .progress-bar {
+    margin-top: 1.25rem;
+    height: 4px;
+  }
+
+  .progress-fill {
+    height: 4px;
+  }
+
+  .no-word {
+    font-size: 1.125rem;
   }
 }
 </style>

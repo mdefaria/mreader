@@ -210,7 +210,7 @@ async function processFile(file: File) {
 /* Responsive */
 @media (max-width: 768px) {
   .book-uploader {
-    padding: 2rem 1rem;
+    padding: 2rem 1.25rem;
   }
 
   .upload-icon {
@@ -219,6 +219,59 @@ async function processFile(file: File) {
 
   .book-uploader h3 {
     font-size: 1.25rem;
+  }
+
+  .book-uploader p {
+    font-size: 0.9rem;
+  }
+
+  .browse-button {
+    padding: 0.625rem 1.75rem;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-uploader {
+    padding: 1.5rem 1rem;
+  }
+
+  .upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .book-uploader h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .book-uploader p {
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .browse-button {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.9375rem;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .error-message {
+    margin-top: 0.875rem;
+    padding: 0.625rem;
+    font-size: 0.875rem;
+  }
+
+  .spinner {
+    width: 28px;
+    height: 28px;
+    border-width: 2.5px;
+  }
+
+  .uploading p {
+    font-size: 0.875rem;
   }
 }
 </style>
