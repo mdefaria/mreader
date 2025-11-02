@@ -174,4 +174,31 @@ const visibleWords = computed(() => {
     font-size: 0.85rem;
   }
 }
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .context-page {
+    padding: 0.75rem;
+  }
+
+  .context-text {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    padding-bottom: 1.5rem;
+  }
+
+  .context-controls {
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+  }
+
+  .nav-button {
+    padding: 0.375rem 0.625rem;
+    font-size: 0.8125rem;
+  }
+
+  .page-info {
+    font-size: 0.8125rem;
+  }
+}
 </style>

@@ -244,6 +244,25 @@ onUnmounted(() => {
   }
 }
 
+/* Extra small screens */
+@media (max-width: 480px) {
+  .reader-header {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .back-button,
+  .settings-button {
+    font-size: 1rem;
+    padding: 0.375rem;
+  }
+
+  .book-title {
+    font-size: 0.9375rem;
+    padding: 0 0.5rem;
+  }
+}
+
 /* Print styles */
 @media print {
   .reader-header {
