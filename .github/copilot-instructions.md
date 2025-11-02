@@ -283,4 +283,5 @@ Consider performance for large books (virtualization)
 Keep UI responsive during file processing
 Provide responses with Vue/Vite specific patterns. Emphasize web-first development with optional native distribution. Focus on typography control and smooth animations for optimal reading experience.
 
+Remember to always update the package.json version if there are code changes.
 User Task:
