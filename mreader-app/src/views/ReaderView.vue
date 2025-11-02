@@ -74,20 +74,23 @@ const isComplete = computed(() => readerStore.isComplete)
 
 // Gesture handlers
 useGestures(readerContainer, {
-  onTapTop: () => {
-    showSettings.value = true
-    readerStore.pause()
-  },
-  onTapBottom: () => {
-    readerStore.togglePlayPause()
+  onTap: () => {
+    // When playing, any tap toggles play/pause
+    if (isPlaying.value) {
+      readerStore.togglePlayPause()
+    } else {
+      // When paused, any tap on background (not on words) starts playback
+      readerStore.play()
+    }
   },
 })
 
 // Navigation handlers
 function handleJumpToWord(index: number) {
-  readerStore.pause()
+  // Jump to the word and start playing from there
   readerStore.currentIndex = Math.max(0, Math.min(index, words.value.length - 1))
   readerStore.savePosition()
+  readerStore.play()
 }
 
 function handleCloseSettings() {
