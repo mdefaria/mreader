@@ -73,6 +73,59 @@ See Section 3: [Research Findings](#research-findings) for model comparisons.
 
 **Status:** Complete and ready for implementation
 
+### [curated-library-research.md](./curated-library-research.md)
+**Comprehensive research spike on offering a curated library of books.**
+
+This 1,424-line research document provides:
+
+#### Executive Summary
+- Evaluation of public domain book sources (Project Gutenberg, Standard Ebooks, Internet Archive)
+- Legal framework for copyright-free books and AI/LLM processing
+- Technical infrastructure design (AWS S3 + CloudFront)
+- Cost analysis: $40-50/month for MVP (potentially free with AWS Free Tier)
+- **Recommendation**: Start with Standard Ebooks + Project Gutenberg, process with LLM for prosody
+
+#### Key Sections
+
+1. **Copyright-Free Book Sources**:
+   - Project Gutenberg: 70,000+ books (⭐⭐⭐⭐)
+   - Standard Ebooks: 700 high-quality classics (⭐⭐⭐⭐⭐)
+   - Internet Archive: 20M+ items (⭐⭐⭐)
+   - Feedbooks, Wikisource alternatives
+
+2. **Legal and Licensing Framework**:
+   - US public domain law (pre-1923 works)
+   - Trademark compliance requirements
+   - AI/LLM processing legality
+   - International copyright considerations
+
+3. **Technical Infrastructure**:
+   - AWS S3 for storage, CloudFront for CDN
+   - Cost breakdown and optimization strategies
+   - File formats and compression (EPUB, TXT, JSON)
+   - Metadata management and authentication
+
+4. **Transition to Paid Content**:
+   - Licensing models (purchase, subscription, lending)
+   - Major distributors (Smashwords, Draft2Digital)
+   - DRM options (Readium LCP recommended)
+   - Royalty structures (30-70% splits)
+
+5. **Implementation Roadmap**:
+   - 4-phase plan (MVP to paid content)
+   - Budget: $50-100/month initially
+   - Timeline: 6-12 months
+
+#### Success Criteria (from original spike)
+
+✅ Identified 2-3 viable public domain book sources with comparison  
+✅ Documented legal requirements for redistribution and AI processing  
+✅ Designed technical infrastructure with cost estimates  
+✅ Outlined transition path to paid/licensed content  
+✅ Created actionable implementation roadmap
+
+**Status:** Complete and ready for implementation planning
+
 ---
 
 ## Contributing
