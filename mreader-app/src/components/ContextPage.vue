@@ -267,6 +267,10 @@ function handleNextPage() {
 
   .page-info {
     font-size: 0.8125rem;
+  }
+}
+
+/* Large screens */
 @media (min-width: 1200px) {
   .context-page {
     padding: 3rem 4rem;
