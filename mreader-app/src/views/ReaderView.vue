@@ -177,11 +177,13 @@ useGestures(readerContainer, {
 })
 
 // Navigation handlers
-function handleJumpToWord(index: number) {
-  // Jump to the word and start playing from there
+function handleJumpToWord(index: number, shouldPlay = true) {
+  // Jump to the word and optionally start playing from there
   readerStore.currentIndex = Math.max(0, Math.min(index, words.value.length - 1))
   readerStore.savePosition()
-  readerStore.play()
+  if (shouldPlay) {
+    readerStore.play()
+  }
 }
 
 function handleCloseSettings() {

@@ -10,20 +10,20 @@
           before: startIndex + index < currentIndex,
           after: startIndex + index > currentIndex,
         }"
-        @click="$emit('jump-to-word', startIndex + index)"
+        @click="$emit('jump-to-word', startIndex + index, true)"
       >
         {{ word.text }}
       </span>
     </div>
 
     <div class="context-controls">
-      <button @click="handlePreviousPage" :disabled="startIndex === 0" class="nav-button">
+      <button @click.stop="handlePreviousPage" :disabled="startIndex === 0" class="nav-button">
         ← Previous
       </button>
       <div class="page-info">
         {{ Math.floor(currentIndex / calculatedWordsPerPage) + 1 }} / {{ totalPages }}
       </div>
-      <button @click="handleNextPage" :disabled="endIndex >= totalWords" class="nav-button">
+      <button @click.stop="handleNextPage" :disabled="endIndex >= totalWords" class="nav-button">
         Next →
       </button>
     </div>
@@ -45,7 +45,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  'jump-to-word': [index: number]
+  'jump-to-word': [index: number, shouldPlay: boolean]
   'previous-page': []
   'next-page': []
 }>()
@@ -121,14 +121,14 @@ function handlePreviousPage() {
   const currentPage = Math.floor(props.currentIndex / calculatedWordsPerPage.value)
   const newPage = Math.max(0, currentPage - 1)
   const newIndex = newPage * calculatedWordsPerPage.value
-  emit('jump-to-word', newIndex)
+  emit('jump-to-word', newIndex, false)
 }
 
 function handleNextPage() {
   const currentPage = Math.floor(props.currentIndex / calculatedWordsPerPage.value)
   const newPage = currentPage + 1
   const newIndex = Math.min(totalWords.value - 1, newPage * calculatedWordsPerPage.value)
-  emit('jump-to-word', newIndex)
+  emit('jump-to-word', newIndex, false)
 }
 </script>
 
