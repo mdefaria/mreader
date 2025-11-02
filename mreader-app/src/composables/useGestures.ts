@@ -5,8 +5,7 @@
 import { ref, onMounted, onUnmounted, type Ref } from 'vue'
 
 export interface UseGesturesOptions {
-  onTapTop?: () => void
-  onTapBottom?: () => void
+  onTap?: () => void
   onSwipeLeft?: () => void
   onSwipeRight?: () => void
 }
@@ -36,6 +35,10 @@ export function useGestures(
         tagName === 'textarea' ||
         (current.hasAttribute('role') && ['button', 'link'].includes(current.getAttribute('role') || ''))
       ) {
+        return true
+      }
+      // Check if element has clickable classes (for ContextPage elements)
+      if (current.classList.contains('word') || current.classList.contains('nav-button')) {
         return true
       }
       current = current.parentElement
@@ -71,7 +74,7 @@ export function useGestures(
     if (distance < TAP_THRESHOLD && deltaTime < TAP_TIME_THRESHOLD) {
       // Prevent synthetic click event from firing
       e.preventDefault()
-      handleTap(touch.clientY)
+      handleTap()
       return
     }
 
@@ -87,17 +90,11 @@ export function useGestures(
     }
   }
 
-  function handleTap(clientY: number) {
+  function handleTap() {
     if (!element.value) return
 
-    const rect = element.value.getBoundingClientRect()
-    const relativeY = clientY - rect.top
-    const isTopHalf = relativeY < rect.height / 2
-
-    if (isTopHalf && options.onTapTop) {
-      options.onTapTop()
-    } else if (!isTopHalf && options.onTapBottom) {
-      options.onTapBottom()
+    if (options.onTap) {
+      options.onTap()
     }
   }
 
@@ -110,14 +107,8 @@ export function useGestures(
       return
     }
 
-    const rect = element.value.getBoundingClientRect()
-    const relativeY = e.clientY - rect.top
-    const isTopHalf = relativeY < rect.height / 2
-
-    if (isTopHalf && options.onTapTop) {
-      options.onTapTop()
-    } else if (!isTopHalf && options.onTapBottom) {
-      options.onTapBottom()
+    if (options.onTap) {
+      options.onTap()
     }
   }
 
