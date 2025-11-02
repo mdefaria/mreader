@@ -69,12 +69,16 @@ export function useGestures(
 
     // Check for tap
     if (distance < TAP_THRESHOLD && deltaTime < TAP_TIME_THRESHOLD) {
+      // Prevent synthetic click event from firing
+      e.preventDefault()
       handleTap(touch.clientY)
       return
     }
 
     // Check for swipe
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > SWIPE_THRESHOLD) {
+      // Prevent synthetic click event from firing
+      e.preventDefault()
       if (deltaX > 0 && options.onSwipeRight) {
         options.onSwipeRight()
       } else if (deltaX < 0 && options.onSwipeLeft) {
@@ -121,7 +125,8 @@ export function useGestures(
     if (!element.value) return
 
     element.value.addEventListener('touchstart', handleTouchStart, { passive: true })
-    element.value.addEventListener('touchend', handleTouchEnd, { passive: true })
+    // touchend cannot be passive since we call preventDefault() to prevent synthetic clicks
+    element.value.addEventListener('touchend', handleTouchEnd, { passive: false })
     element.value.addEventListener('click', handleClick)
   })
 
