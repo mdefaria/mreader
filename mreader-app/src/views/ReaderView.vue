@@ -26,10 +26,7 @@
         v-else
         :words="words"
         :current-index="currentIndex"
-        :words-per-page="100"
         @jump-to-word="handleJumpToWord"
-        @previous-page="handlePreviousPage"
-        @next-page="handleNextPage"
       />
     </div>
 
@@ -90,30 +87,6 @@ useGestures(readerContainer, {
 function handleJumpToWord(index: number) {
   readerStore.pause()
   readerStore.currentIndex = Math.max(0, Math.min(index, words.value.length - 1))
-  readerStore.savePosition()
-}
-
-function handlePreviousPage() {
-  const wordsPerPage = 100
-  // Calculate current page
-  const currentPage = Math.floor(currentIndex.value / wordsPerPage)
-  // Go to start of previous page
-  const newPage = Math.max(0, currentPage - 1)
-  const newIndex = newPage * wordsPerPage
-  readerStore.pause()
-  readerStore.currentIndex = newIndex
-  readerStore.savePosition()
-}
-
-function handleNextPage() {
-  const wordsPerPage = 100
-  // Calculate current page
-  const currentPage = Math.floor(currentIndex.value / wordsPerPage)
-  // Go to start of next page
-  const newPage = currentPage + 1
-  const newIndex = Math.min(words.value.length - 1, newPage * wordsPerPage)
-  readerStore.pause()
-  readerStore.currentIndex = newIndex
   readerStore.savePosition()
 }
 
