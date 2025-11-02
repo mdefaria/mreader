@@ -49,6 +49,11 @@
       </button>
     </div>
 
+    <!-- Version display -->
+    <div class="version-display" role="contentinfo" aria-label="App version">
+      v{{ appVersion }}
+    </div>
+
     <!-- Delete confirmation modal -->
     <Teleport to="body">
       <div v-if="deleteConfirm" class="confirm-overlay" @click="deleteConfirm = null">
@@ -69,6 +74,9 @@
 import { ref, computed } from 'vue'
 import { useLibraryStore } from '@/stores/library'
 import BookUploader from '@/components/BookUploader.vue'
+
+// Get app version from package.json
+const appVersion = import.meta.env.VITE_APP_VERSION || '0.1.0'
 
 const emit = defineEmits<{
   'open-book': [bookId: string]
@@ -381,6 +389,49 @@ async function deleteBook() {
 
   .confirm-dialog {
     padding: 1.5rem;
+  }
+}
+
+/* Version display */
+.version-display {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  z-index: 100;
+}
+
+/* Improve visibility on focus for keyboard navigation */
+.version-display:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Only apply hover on devices that support it (not touch-only) */
+@media (hover: hover) and (pointer: fine) {
+  .version-display:hover {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .version-display {
+    bottom: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.6875rem;
+    padding: 0.3125rem 0.625rem;
   }
 }
 </style>

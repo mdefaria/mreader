@@ -6,6 +6,7 @@
       :book-id="selectedBookId"
       @back-to-library="backToLibrary"
     />
+    <UpdatePrompt />
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import { useLibraryStore } from './stores/library'
 import { useSettingsStore } from './stores/settings'
 import LibraryView from './views/LibraryView.vue'
 import ReaderView from './views/ReaderView.vue'
+import UpdatePrompt from './components/UpdatePrompt.vue'
 
 type View = 'library' | 'reader'
 
