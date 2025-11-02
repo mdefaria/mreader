@@ -175,4 +175,24 @@ const afterPivot = computed(() => {
     font-size: clamp(1.5rem, 10vw, 3rem);
   }
 }
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .rsvp-display {
+    min-height: 180px;
+    padding: 0.75rem;
+  }
+
+  .word {
+    font-size: clamp(1.25rem, 11vw, 2.5rem);
+  }
+
+  .progress-bar {
+    margin-top: 1.5rem;
+  }
+
+  .no-word {
+    font-size: 1.25rem;
+  }
+}
 </style>

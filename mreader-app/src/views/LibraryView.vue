@@ -339,4 +339,48 @@ async function deleteBook() {
     grid-template-columns: 1fr;
   }
 }
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .library-header {
+    padding: 0.75rem;
+  }
+
+  .library-header h1 {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .search-input {
+    max-width: 100%;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9375rem;
+  }
+
+  .library-content {
+    padding: 0.75rem;
+  }
+
+  .books-grid {
+    gap: 1rem;
+  }
+
+  .book-card {
+    padding: 1rem;
+  }
+
+  .book-title {
+    font-size: 1.125rem;
+  }
+
+  .book-meta {
+    font-size: 0.8rem;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .confirm-dialog {
+    padding: 1.5rem;
+  }
+}
 </style>
