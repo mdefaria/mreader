@@ -1,4 +1,5 @@
 import { useRegisterSW } from 'virtual:pwa-register/vue'
+import { onUnmounted } from 'vue'
 
 /**
  * Composable for handling PWA updates
@@ -9,6 +10,8 @@ import { useRegisterSW } from 'virtual:pwa-register/vue'
  * @returns Object containing update state and control functions
  */
 export function usePwaUpdate() {
+  let updateCheckInterval: ReturnType<typeof setInterval> | null = null
+  
   const {
     needRefresh,
     offlineReady,
@@ -19,7 +22,7 @@ export function usePwaUpdate() {
       
       // Check for updates periodically (every hour)
       if (registration) {
-        setInterval(() => {
+        updateCheckInterval = setInterval(() => {
           registration.update()
         }, 60 * 60 * 1000) // 1 hour
       }
@@ -28,6 +31,13 @@ export function usePwaUpdate() {
       console.error('Service Worker registration error:', error)
     },
     immediate: true
+  })
+  
+  // Clean up interval on component unmount
+  onUnmounted(() => {
+    if (updateCheckInterval) {
+      clearInterval(updateCheckInterval)
+    }
   })
   
   // Update function that triggers service worker update

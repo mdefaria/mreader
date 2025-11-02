@@ -412,8 +412,18 @@ async function deleteBook() {
   z-index: 100;
 }
 
-.version-display:hover {
+/* Improve visibility on focus for keyboard navigation */
+.version-display:focus-visible {
   opacity: 1;
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Only apply hover on devices that support it (not touch-only) */
+@media (hover: hover) and (pointer: fine) {
+  .version-display:hover {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 480px) {

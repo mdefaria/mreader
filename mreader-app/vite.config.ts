@@ -2,9 +2,11 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import { VitePWA } from 'vite-plugin-pwa'
+import { readFileSync } from 'node:fs'
 
 // Read version from package.json
-import pkg from './package.json'
+const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'))
+const appVersion = packageJson.version
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -48,6 +50,6 @@ export default defineConfig({
     }
   },
   define: {
-    'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkg.version)
+    'import.meta.env.VITE_APP_VERSION': JSON.stringify(appVersion)
   }
 })
