@@ -25,9 +25,8 @@ export async function parseEpubFile(file: File): Promise<{
   // Load EPUB book
   const book = ePub(arrayBuffer)
 
-  // Wait for book to be ready and spine to be loaded
+  // Wait for book to be ready
   await book.ready
-  await book.locations.generate(1024)
 
   const metadata: EpubMetadata = {
     title: book.packaging?.metadata?.title,
@@ -38,7 +37,8 @@ export async function parseEpubFile(file: File): Promise<{
 
   // Extract text from all sections
   const textContent: string[] = []
-  const spine = book.spine as any
+  // Note: epubjs Spine type definitions are incomplete, so we use unknown casting
+  const spine = book.spine as unknown as { length: number; get: (index: number) => any }
 
   // Iterate through each section in the spine
   for (let i = 0; i < spine.length; i++) {
@@ -69,13 +69,13 @@ export async function parseEpubFile(file: File): Promise<{
 /**
  * Extract plain text from HTML document
  */
-function extractTextFromHtml(doc: any): string {
+function extractTextFromHtml(doc: Document | XMLDocument | null | undefined): string {
   // Handle both Document and XMLDocument objects
   if (!doc) return ''
 
   // Remove script and style elements
   const scripts = doc.querySelectorAll('script, style')
-  scripts.forEach((el: any) => el.remove())
+  scripts.forEach((el: Element) => el.remove())
 
   // Get text content
   const text = doc.body?.textContent || doc.documentElement?.textContent || ''
