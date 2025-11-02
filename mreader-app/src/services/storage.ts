@@ -20,18 +20,24 @@ interface MReaderDB extends DBSchema {
 class StorageService {
   private db: IDBPDatabase<MReaderDB> | null = null
   private readonly DB_NAME = 'mreader-db'
-  private readonly DB_VERSION = 1
+  private readonly DB_VERSION = 2 // Incremented for format field
 
   async init(): Promise<void> {
     if (this.db) return
 
     this.db = await openDB<MReaderDB>(this.DB_NAME, this.DB_VERSION, {
-      upgrade(db) {
+      upgrade(db, oldVersion) {
         // Create books store
         if (!db.objectStoreNames.contains('books')) {
           const bookStore = db.createObjectStore('books', { keyPath: 'id' })
           bookStore.createIndex('by-title', 'title')
           bookStore.createIndex('by-addedAt', 'addedAt')
+        }
+
+        // Migration for v1 to v2: Add format field to existing books
+        if (oldVersion < 2) {
+          // The format field will be added with a default value when books are loaded
+          console.log('Database upgraded to version 2')
         }
 
         // Create settings store
@@ -55,7 +61,13 @@ class StorageService {
 
   async getAllBooks(): Promise<Book[]> {
     await this.init()
-    return await this.db!.getAll('books')
+    const books = await this.db!.getAll('books')
+    
+    // Ensure all books have the format field (migration for old data)
+    return books.map(book => ({
+      ...book,
+      format: book.format || 'txt', // Default to txt for old books
+    }))
   }
 
   async updateBook(book: Book): Promise<void> {

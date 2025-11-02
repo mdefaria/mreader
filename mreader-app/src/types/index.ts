@@ -13,11 +13,14 @@ export interface Word {
   }
 }
 
+export type BookFormat = 'txt' | 'epub'
+
 export interface Book {
   id: string
   title: string
   author?: string
   content: string
+  format: BookFormat
   lastPosition: number
   totalWords: number
   prosodyData?: ProsodyData
