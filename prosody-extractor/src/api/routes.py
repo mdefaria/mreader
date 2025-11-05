@@ -27,21 +27,25 @@ async def analyze_text(request: AnalysisRequest) -> ProsodyResult:
     try:
         # Extract options
         options = request.options or {}
-        wpm = options.get('wpm', 300)
-        sensitivity = options.get('sensitivity', 0.7)
+        
+        # Separate provider initialization options from analysis options
+        provider_options = {k: v for k, v in options.items() 
+                          if k in ['model', 'temperature', 'max_tokens']}
+        analysis_params = {
+            'wpm': options.get('wpm', 300),
+            'sensitivity': options.get('sensitivity', 0.7)
+        }
         
         # Initialize processor with requested provider
         processor = ProsodyProcessor(
             provider=request.provider,
-            **options
+            **provider_options
         )
         
         # Analyze text
         result = processor.analyze(
             text=request.text,
-            wpm=wpm,
-            sensitivity=sensitivity,
-            **options
+            **analysis_params
         )
         
         return result

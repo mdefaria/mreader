@@ -2,12 +2,19 @@
 
 import logging
 import os
+import sys
+from pathlib import Path
+
+# Add parent directory to path for imports when running as script
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from dotenv import load_dotenv
 
-from .api.routes import router
+from src.api.routes import router
 
 # Load environment variables
 load_dotenv()
