@@ -58,11 +58,12 @@ export const useReaderStore = defineStore('reader', () => {
 
     currentBook.value = book
     
-    // Tokenize with current settings
+    // Tokenize with current settings and use prosody data if available
     words.value = tokenize(
       book.content,
       settingsStore.wpm,
-      settingsStore.prosodySensitivity
+      settingsStore.prosodySensitivity,
+      book.prosodyData
     )
 
     // Restore last position
@@ -83,7 +84,8 @@ export const useReaderStore = defineStore('reader', () => {
     words.value = tokenize(
       currentBook.value.content,
       settingsStore.wpm,
-      settingsStore.prosodySensitivity
+      settingsStore.prosodySensitivity,
+      currentBook.value.prosodyData
     )
 
     // Restore position

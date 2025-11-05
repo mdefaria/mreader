@@ -1,0 +1,3376 @@
+{
+  "title": "Test Title",
+  "author": "Author Name",
+  "version": "1.0",
+  "method": "kokoro-tts",
+  "metadata": {
+    "wordCount": 210,
+    "avgWordLength": 4.33,
+    "totalPauses": 0,
+    "emphasisCount": 137,
+    "processingTime": 4.6108,
+    "model": "kokoro-tts-82m-a"
+  },
+  "words": [
+    {
+      "text": "His",
+      "index": 0,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 175,
+      "prosody": {
+        "pause": 1.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "name",
+      "index": 1,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 212,
+      "prosody": {
+        "pause": 1.3306666666666667,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "was",
+      "index": 2,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Gaal",
+      "index": 3,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 224,
+      "prosody": {
+        "pause": 1.3946666666666667,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Dornick",
+      "index": 4,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 562,
+      "prosody": {
+        "pause": 3.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "and",
+      "index": 5,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "he",
+      "index": 6,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 75,
+      "prosody": {
+        "pause": 0.6,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "was",
+      "index": 7,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "just",
+      "index": 8,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "a",
+      "index": 9,
+      "start": 0,
+      "end": 1,
+      "pivotIndex": 0,
+      "baseDelay": 62,
+      "prosody": {
+        "pause": 0.5306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "country",
+      "index": 10,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 375,
+      "prosody": {
+        "pause": 2.2,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "boy",
+      "index": 11,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 237,
+      "prosody": {
+        "pause": 1.464,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "who",
+      "index": 12,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 100,
+      "prosody": {
+        "pause": 0.7333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "had",
+      "index": 13,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "never",
+      "index": 14,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 274,
+      "prosody": {
+        "pause": 1.6613333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "seen",
+      "index": 15,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 225,
+      "prosody": {
+        "pause": 1.4,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Trantor",
+      "index": 16,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 437,
+      "prosody": {
+        "pause": 2.530666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "before",
+      "index": 17,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 787,
+      "prosody": {
+        "pause": 4.397333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "That",
+      "index": 18,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 274,
+      "prosody": {
+        "pause": 1.6613333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "is",
+      "index": 19,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 362,
+      "prosody": {
+        "pause": 2.130666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "not",
+      "index": 20,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 225,
+      "prosody": {
+        "pause": 1.4,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "in",
+      "index": 21,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 149,
+      "prosody": {
+        "pause": 0.9946666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "real",
+      "index": 22,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 250,
+      "prosody": {
+        "pause": 1.5333333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "life",
+      "index": 23,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 675,
+      "prosody": {
+        "pause": 3.8000000000000003,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "He",
+      "index": 24,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "had",
+      "index": 25,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "seen",
+      "index": 26,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 200,
+      "prosody": {
+        "pause": 1.2666666666666666,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "it",
+      "index": 27,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "many",
+      "index": 28,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 225,
+      "prosody": {
+        "pause": 1.4,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "times",
+      "index": 29,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 362,
+      "prosody": {
+        "pause": 2.130666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "on",
+      "index": 30,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 100,
+      "prosody": {
+        "pause": 0.7333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 31,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "hyper-video",
+      "index": 32,
+      "start": 0,
+      "end": 11,
+      "pivotIndex": 3,
+      "baseDelay": 825,
+      "prosody": {
+        "pause": 4.6,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "and",
+      "index": 33,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "occasionally",
+      "index": 34,
+      "start": 0,
+      "end": 12,
+      "pivotIndex": 3,
+      "baseDelay": 637,
+      "prosody": {
+        "pause": 3.5973333333333337,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "in",
+      "index": 35,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 99,
+      "prosody": {
+        "pause": 0.728,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "tremendous",
+      "index": 36,
+      "start": 0,
+      "end": 10,
+      "pivotIndex": 3,
+      "baseDelay": 562,
+      "prosody": {
+        "pause": 3.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "three-dimensional",
+      "index": 37,
+      "start": 0,
+      "end": 17,
+      "pivotIndex": 5,
+      "baseDelay": 712,
+      "prosody": {
+        "pause": 3.9973333333333336,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "newscasts",
+      "index": 38,
+      "start": 0,
+      "end": 9,
+      "pivotIndex": 2,
+      "baseDelay": 675,
+      "prosody": {
+        "pause": 3.8000000000000003,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "covering",
+      "index": 39,
+      "start": 0,
+      "end": 8,
+      "pivotIndex": 2,
+      "baseDelay": 387,
+      "prosody": {
+        "pause": 2.2640000000000002,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "an",
+      "index": 40,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Imperial",
+      "index": 41,
+      "start": 0,
+      "end": 8,
+      "pivotIndex": 2,
+      "baseDelay": 549,
+      "prosody": {
+        "pause": 3.128,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Coronation",
+      "index": 42,
+      "start": 0,
+      "end": 10,
+      "pivotIndex": 3,
+      "baseDelay": 787,
+      "prosody": {
+        "pause": 4.397333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "or",
+      "index": 43,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 44,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 149,
+      "prosody": {
+        "pause": 0.9946666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "opening",
+      "index": 45,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 462,
+      "prosody": {
+        "pause": 2.664,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "of",
+      "index": 46,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "a",
+      "index": 47,
+      "start": 0,
+      "end": 1,
+      "pivotIndex": 0,
+      "baseDelay": 62,
+      "prosody": {
+        "pause": 0.5306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Galactic",
+      "index": 48,
+      "start": 0,
+      "end": 8,
+      "pivotIndex": 2,
+      "baseDelay": 525,
+      "prosody": {
+        "pause": 3.0,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Council",
+      "index": 49,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 950,
+      "prosody": {
+        "pause": 5.0,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Even",
+      "index": 50,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 274,
+      "prosody": {
+        "pause": 1.6613333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "though",
+      "index": 51,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "he",
+      "index": 52,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "had",
+      "index": 53,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "lived",
+      "index": 54,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 274,
+      "prosody": {
+        "pause": 1.6613333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "all",
+      "index": 55,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "his",
+      "index": 56,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "life",
+      "index": 57,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 287,
+      "prosody": {
+        "pause": 1.7306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "on",
+      "index": 58,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 100,
+      "prosody": {
+        "pause": 0.7333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 59,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "world",
+      "index": 60,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 287,
+      "prosody": {
+        "pause": 1.7306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "of",
+      "index": 61,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Synnax",
+      "index": 62,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 687,
+      "prosody": {
+        "pause": 3.8640000000000003,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "which",
+      "index": 63,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 212,
+      "prosody": {
+        "pause": 1.3306666666666667,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "circled",
+      "index": 64,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 349,
+      "prosody": {
+        "pause": 2.0613333333333337,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "a",
+      "index": 65,
+      "start": 0,
+      "end": 1,
+      "pivotIndex": 0,
+      "baseDelay": 74,
+      "prosody": {
+        "pause": 0.5946666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "star",
+      "index": 66,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 387,
+      "prosody": {
+        "pause": 2.2640000000000002,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "at",
+      "index": 67,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 68,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "edges",
+      "index": 69,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 350,
+      "prosody": {
+        "pause": 2.066666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "of",
+      "index": 70,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 74,
+      "prosody": {
+        "pause": 0.5946666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 71,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Blue",
+      "index": 72,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 225,
+      "prosody": {
+        "pause": 1.4,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Drift",
+      "index": 73,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 574,
+      "prosody": {
+        "pause": 3.2613333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "he",
+      "index": 74,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "was",
+      "index": 75,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "not",
+      "index": 76,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 250,
+      "prosody": {
+        "pause": 1.5333333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "cut",
+      "index": 77,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "off",
+      "index": 78,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "from",
+      "index": 79,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 175,
+      "prosody": {
+        "pause": 1.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "civilization",
+      "index": 80,
+      "start": 0,
+      "end": 12,
+      "pivotIndex": 3,
+      "baseDelay": 800,
+      "prosody": {
+        "pause": 4.466666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "you",
+      "index": 81,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "see",
+      "index": 82,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 612,
+      "prosody": {
+        "pause": 3.4640000000000004,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "At",
+      "index": 83,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 175,
+      "prosody": {
+        "pause": 1.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "that",
+      "index": 84,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 225,
+      "prosody": {
+        "pause": 1.4,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "time",
+      "index": 85,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 474,
+      "prosody": {
+        "pause": 2.728,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "no",
+      "index": 86,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 175,
+      "prosody": {
+        "pause": 1.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "place",
+      "index": 87,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 312,
+      "prosody": {
+        "pause": 1.864,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "in",
+      "index": 88,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 74,
+      "prosody": {
+        "pause": 0.5946666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 89,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Galaxy",
+      "index": 90,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 500,
+      "prosody": {
+        "pause": 2.866666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "was",
+      "index": 91,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 625,
+      "prosody": {
+        "pause": 3.5333333333333337,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "There",
+      "index": 92,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "were",
+      "index": 93,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "nearly",
+      "index": 94,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 362,
+      "prosody": {
+        "pause": 2.130666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "twenty-five",
+      "index": 95,
+      "start": 0,
+      "end": 11,
+      "pivotIndex": 3,
+      "baseDelay": 700,
+      "prosody": {
+        "pause": 3.9333333333333336,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "million",
+      "index": 96,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 375,
+      "prosody": {
+        "pause": 2.2,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "inhabited",
+      "index": 97,
+      "start": 0,
+      "end": 9,
+      "pivotIndex": 2,
+      "baseDelay": 562,
+      "prosody": {
+        "pause": 3.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "planets",
+      "index": 98,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 437,
+      "prosody": {
+        "pause": 2.530666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "in",
+      "index": 99,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 75,
+      "prosody": {
+        "pause": 0.6,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 100,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Galaxy",
+      "index": 101,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 500,
+      "prosody": {
+        "pause": 2.866666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "then",
+      "index": 102,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 550,
+      "prosody": {
+        "pause": 3.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "and",
+      "index": 103,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "not",
+      "index": 104,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 250,
+      "prosody": {
+        "pause": 1.5333333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "one",
+      "index": 105,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 275,
+      "prosody": {
+        "pause": 1.6666666666666665,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "but",
+      "index": 106,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "owed",
+      "index": 107,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 262,
+      "prosody": {
+        "pause": 1.5973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "allegiance",
+      "index": 108,
+      "start": 0,
+      "end": 10,
+      "pivotIndex": 3,
+      "baseDelay": 525,
+      "prosody": {
+        "pause": 3.0,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "to",
+      "index": 109,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 110,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Empire",
+      "index": 111,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 612,
+      "prosody": {
+        "pause": 3.4640000000000004,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "whose",
+      "index": 112,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 224,
+      "prosody": {
+        "pause": 1.3946666666666667,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "seat",
+      "index": 113,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 237,
+      "prosody": {
+        "pause": 1.464,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "was",
+      "index": 114,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "on",
+      "index": 115,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Trantor",
+      "index": 116,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 1024,
+      "prosody": {
+        "pause": 5.0,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "It",
+      "index": 117,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "was",
+      "index": 118,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 119,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 99,
+      "prosody": {
+        "pause": 0.728,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "last",
+      "index": 120,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 375,
+      "prosody": {
+        "pause": 2.2,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "halfcentury",
+      "index": 121,
+      "start": 0,
+      "end": 11,
+      "pivotIndex": 3,
+      "baseDelay": 724,
+      "prosody": {
+        "pause": 4.061333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "in",
+      "index": 122,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "which",
+      "index": 123,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "that",
+      "index": 124,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 175,
+      "prosody": {
+        "pause": 1.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "could",
+      "index": 125,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "be",
+      "index": 126,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "said",
+      "index": 127,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 762,
+      "prosody": {
+        "pause": 4.264,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "To",
+      "index": 128,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Gaal",
+      "index": 129,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 550,
+      "prosody": {
+        "pause": 3.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "this",
+      "index": 130,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 212,
+      "prosody": {
+        "pause": 1.3306666666666667,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "trip",
+      "index": 131,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 287,
+      "prosody": {
+        "pause": 1.7306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "was",
+      "index": 132,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 133,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 150,
+      "prosody": {
+        "pause": 1.0,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "undoubted",
+      "index": 134,
+      "start": 0,
+      "end": 9,
+      "pivotIndex": 2,
+      "baseDelay": 587,
+      "prosody": {
+        "pause": 3.330666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "climax",
+      "index": 135,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 549,
+      "prosody": {
+        "pause": 3.128,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "of",
+      "index": 136,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "his",
+      "index": 137,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "young",
+      "index": 138,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 500,
+      "prosody": {
+        "pause": 2.866666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "scholarly",
+      "index": 139,
+      "start": 0,
+      "end": 9,
+      "pivotIndex": 2,
+      "baseDelay": 574,
+      "prosody": {
+        "pause": 3.2613333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "life",
+      "index": 140,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 775,
+      "prosody": {
+        "pause": 4.333333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "He",
+      "index": 141,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "had",
+      "index": 142,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 100,
+      "prosody": {
+        "pause": 0.7333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "been",
+      "index": 143,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "in",
+      "index": 144,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "space",
+      "index": 145,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 387,
+      "prosody": {
+        "pause": 2.2640000000000002,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "before",
+      "index": 146,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 500,
+      "prosody": {
+        "pause": 2.866666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "so",
+      "index": 147,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "that",
+      "index": 148,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 149,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 100,
+      "prosody": {
+        "pause": 0.7333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "trip",
+      "index": 150,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 537,
+      "prosody": {
+        "pause": 3.064,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "as",
+      "index": 151,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "a",
+      "index": 152,
+      "start": 0,
+      "end": 1,
+      "pivotIndex": 0,
+      "baseDelay": 100,
+      "prosody": {
+        "pause": 0.7333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "voyage",
+      "index": 153,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 550,
+      "prosody": {
+        "pause": 3.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "and",
+      "index": 154,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "nothing",
+      "index": 155,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 375,
+      "prosody": {
+        "pause": 2.2,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "more",
+      "index": 156,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 425,
+      "prosody": {
+        "pause": 2.466666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "meant",
+      "index": 157,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 199,
+      "prosody": {
+        "pause": 1.2613333333333334,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "little",
+      "index": 158,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 275,
+      "prosody": {
+        "pause": 1.6666666666666665,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "to",
+      "index": 159,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "him",
+      "index": 160,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 550,
+      "prosody": {
+        "pause": 3.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "To",
+      "index": 161,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 62,
+      "prosody": {
+        "pause": 0.5306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "be",
+      "index": 162,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 175,
+      "prosody": {
+        "pause": 1.1333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "sure",
+      "index": 163,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 562,
+      "prosody": {
+        "pause": 3.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "he",
+      "index": 164,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "had",
+      "index": 165,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 112,
+      "prosody": {
+        "pause": 0.7973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "traveled",
+      "index": 166,
+      "start": 0,
+      "end": 8,
+      "pivotIndex": 2,
+      "baseDelay": 449,
+      "prosody": {
+        "pause": 2.594666666666667,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "previously",
+      "index": 167,
+      "start": 0,
+      "end": 10,
+      "pivotIndex": 3,
+      "baseDelay": 612,
+      "prosody": {
+        "pause": 3.4640000000000004,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "only",
+      "index": 168,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 312,
+      "prosody": {
+        "pause": 1.864,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "as",
+      "index": 169,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 150,
+      "prosody": {
+        "pause": 1.0,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "far",
+      "index": 170,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 212,
+      "prosody": {
+        "pause": 1.3306666666666667,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "as",
+      "index": 171,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "Synnax's",
+      "index": 172,
+      "start": 0,
+      "end": 8,
+      "pivotIndex": 2,
+      "baseDelay": 749,
+      "prosody": {
+        "pause": 4.1946666666666665,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "only",
+      "index": 173,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 337,
+      "prosody": {
+        "pause": 1.9973333333333332,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "satellite",
+      "index": 174,
+      "start": 0,
+      "end": 9,
+      "pivotIndex": 2,
+      "baseDelay": 525,
+      "prosody": {
+        "pause": 3.0,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "in",
+      "index": 175,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 99,
+      "prosody": {
+        "pause": 0.728,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "order",
+      "index": 176,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 625,
+      "prosody": {
+        "pause": 3.5333333333333337,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "to",
+      "index": 177,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "get",
+      "index": 178,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 174,
+      "prosody": {
+        "pause": 1.128,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 179,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 100,
+      "prosody": {
+        "pause": 0.7333333333333333,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "data",
+      "index": 180,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 375,
+      "prosody": {
+        "pause": 2.2,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "on",
+      "index": 181,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "the",
+      "index": 182,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 75,
+      "prosody": {
+        "pause": 0.6,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "mechanics",
+      "index": 183,
+      "start": 0,
+      "end": 9,
+      "pivotIndex": 2,
+      "baseDelay": 612,
+      "prosody": {
+        "pause": 3.4640000000000004,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "of",
+      "index": 184,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 137,
+      "prosody": {
+        "pause": 0.9306666666666666,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "meteor",
+      "index": 185,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 387,
+      "prosody": {
+        "pause": 2.2640000000000002,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "driftage",
+      "index": 186,
+      "start": 0,
+      "end": 8,
+      "pivotIndex": 2,
+      "baseDelay": 837,
+      "prosody": {
+        "pause": 4.664,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "which",
+      "index": 187,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "he",
+      "index": 188,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 150,
+      "prosody": {
+        "pause": 1.0,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "needed",
+      "index": 189,
+      "start": 0,
+      "end": 6,
+      "pivotIndex": 1,
+      "baseDelay": 324,
+      "prosody": {
+        "pause": 1.9280000000000002,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "for",
+      "index": 190,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 125,
+      "prosody": {
+        "pause": 0.8666666666666667,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "his",
+      "index": 191,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 199,
+      "prosody": {
+        "pause": 1.2613333333333334,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "dissertation",
+      "index": 192,
+      "start": 0,
+      "end": 12,
+      "pivotIndex": 3,
+      "baseDelay": 1175,
+      "prosody": {
+        "pause": 5.0,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "but",
+      "index": 193,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 150,
+      "prosody": {
+        "pause": 1.0,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "space-travel",
+      "index": 194,
+      "start": 0,
+      "end": 12,
+      "pivotIndex": 3,
+      "baseDelay": 750,
+      "prosody": {
+        "pause": 4.2,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "was",
+      "index": 195,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 187,
+      "prosody": {
+        "pause": 1.1973333333333334,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "all",
+      "index": 196,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 262,
+      "prosody": {
+        "pause": 1.5973333333333333,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "one",
+      "index": 197,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 300,
+      "prosody": {
+        "pause": 1.8,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "whether",
+      "index": 198,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 324,
+      "prosody": {
+        "pause": 1.9280000000000002,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "one",
+      "index": 199,
+      "start": 0,
+      "end": 3,
+      "pivotIndex": 1,
+      "baseDelay": 225,
+      "prosody": {
+        "pause": 1.4,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "travelled",
+      "index": 200,
+      "start": 0,
+      "end": 9,
+      "pivotIndex": 2,
+      "baseDelay": 462,
+      "prosody": {
+        "pause": 2.664,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "half",
+      "index": 201,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 275,
+      "prosody": {
+        "pause": 1.6666666666666665,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "a",
+      "index": 202,
+      "start": 0,
+      "end": 1,
+      "pivotIndex": 0,
+      "baseDelay": 87,
+      "prosody": {
+        "pause": 0.6639999999999999,
+        "pauseAfter": 0,
+        "emphasis": "none",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "million",
+      "index": 203,
+      "start": 0,
+      "end": 7,
+      "pivotIndex": 2,
+      "baseDelay": 349,
+      "prosody": {
+        "pause": 2.0613333333333337,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "miles",
+      "index": 204,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 775,
+      "prosody": {
+        "pause": 4.333333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "or",
+      "index": 205,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 299,
+      "prosody": {
+        "pause": 1.7946666666666666,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "as",
+      "index": 206,
+      "start": 0,
+      "end": 2,
+      "pivotIndex": 1,
+      "baseDelay": 162,
+      "prosody": {
+        "pause": 1.064,
+        "pauseAfter": 0,
+        "emphasis": "low",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "many",
+      "index": 207,
+      "start": 0,
+      "end": 4,
+      "pivotIndex": 2,
+      "baseDelay": 225,
+      "prosody": {
+        "pause": 1.4,
+        "pauseAfter": 0,
+        "emphasis": "medium",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "light",
+      "index": 208,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 250,
+      "prosody": {
+        "pause": 1.5333333333333334,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    },
+    {
+      "text": "years",
+      "index": 209,
+      "start": 0,
+      "end": 5,
+      "pivotIndex": 2,
+      "baseDelay": 699,
+      "prosody": {
+        "pause": 3.9280000000000004,
+        "pauseAfter": 0,
+        "emphasis": "high",
+        "tone": "neutral",
+        "pitch": null,
+        "loudness": null
+      }
+    }
+  ]
+}

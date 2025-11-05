@@ -123,8 +123,6 @@ const afterPivot = computed(() => {
 .word.pivot-mode .pivot {
   color: var(--accent-color, #ff6b6b);
   font-weight: 700;
-  border-bottom: 3px solid var(--accent-color, #ff6b6b);
-  padding-bottom: 2px;
   position: relative;
   left: 0;
   z-index: 1;

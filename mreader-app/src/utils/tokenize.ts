@@ -3,7 +3,7 @@
  * Converts raw text into processable Word objects with prosody
  */
 
-import type { Word } from '@/types'
+import type { Word, ProsodyData } from '@/types'
 import { 
   analyzeProsody, 
   calculatePivotIndex, 
@@ -13,12 +13,35 @@ import {
 
 /**
  * Tokenize text into words with prosody analysis
+ * If prosodyData is provided, use pre-analyzed prosody instead of analyzing
  */
 export function tokenize(
   text: string,
   wpm: number = 250,
-  prosodySensitivity: number = 0.7
+  prosodySensitivity: number = 0.7,
+  prosodyData?: ProsodyData
 ): Word[] {
+  // If we have pre-analyzed prosody data, use it but recalculate timing for current WPM
+  if (prosodyData?.analyzed && prosodyData.words.length > 0) {
+    const baseDelay = calculateBaseDelay(wpm)
+    
+    console.log('📊 Using pre-analyzed prosody:', {
+      method: prosodyData.method,
+      wordCount: prosodyData.words.length,
+      baseDelay: `${baseDelay}ms (${wpm} WPM)`,
+      sampleWord: prosodyData.words[0]
+    })
+    
+    return prosodyData.words.map(word => {
+      const calculatedDelay = calculateWordDelay(baseDelay, word.prosody)
+      return {
+        ...word,
+        baseDelayMs: calculatedDelay,
+      }
+    })
+  }
+
+  // Otherwise, fall back to client-side analysis
   // Split by whitespace but preserve structure
   const rawWords = text
     .split(/\s+/)

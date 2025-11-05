@@ -9,11 +9,11 @@
     <div class="upload-content">
       <div class="upload-icon">📚</div>
       <h3>Add a Book</h3>
-      <p>Drag and drop a text or EPUB file here, or click to browse</p>
+      <p>Drag and drop a text, EPUB, or prosody file here, or click to browse</p>
       <input
         ref="fileInput"
         type="file"
-        accept=".txt,.md,.epub"
+        accept=".txt,.md,.epub,.prosody.json,.json"
         @change="handleFileSelect"
         class="file-input"
       />
@@ -43,8 +43,8 @@ const isUploading = ref(false)
 const error = ref('')
 const fileInput = ref<HTMLInputElement | null>(null)
 
-const ACCEPTED_TYPES = ['text/plain', 'text/markdown', 'application/epub+zip']
-const ACCEPTED_EXTENSIONS = /\.(txt|md|epub)$/i
+const ACCEPTED_TYPES = ['text/plain', 'text/markdown', 'application/epub+zip', 'application/json']
+const ACCEPTED_EXTENSIONS = /\.(txt|md|epub|prosody\.json|json)$/i
 const MAX_FILE_SIZE = 50 * 1024 * 1024 // 50MB (EPUB files can be larger)
 
 function openFilePicker() {
@@ -72,7 +72,7 @@ async function processFile(file: File) {
 
   // Validate file type
   if (!ACCEPTED_TYPES.includes(file.type) && !ACCEPTED_EXTENSIONS.test(file.name)) {
-    error.value = 'Please upload a .txt, .md, or .epub file'
+    error.value = 'Please upload a .txt, .md, .epub, or .prosody.json file'
     return
   }
 
