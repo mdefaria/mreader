@@ -113,6 +113,7 @@ class KokoroTTSProvider(BaseProsodyProvider):
             self.device = device_arg
         
         logger.info(f"Initializing Kokoro TTS on {self.device} (lang={self.lang_code}, voice={self.voice})")
+        print(f"Using device: {self.device}")
         
         # Initialize pipeline and model
         try:
@@ -127,6 +128,9 @@ class KokoroTTSProvider(BaseProsodyProvider):
             
             # Set model on pipeline
             self.pipeline.model = self.model
+            
+            # Verify device placement
+            print(f"Model device: {next(self.model.parameters()).device}")
             
             logger.info("Kokoro TTS provider initialized successfully")
             
@@ -148,6 +152,8 @@ class KokoroTTSProvider(BaseProsodyProvider):
         """
         Analyze text using Kokoro TTS timing extraction.
         
+        Automatically uses batch processing for texts longer than 1000 words.
+        
         Args:
             text: Text to analyze
             options: Analysis options
@@ -162,6 +168,15 @@ class KokoroTTSProvider(BaseProsodyProvider):
         
         # Preprocess
         text = self.preprocess_text(text)
+        
+        # Check word count and use batch processing for long texts
+        word_count = len(text.split())
+        
+        if word_count > 1000:
+            # Use batch processing for long texts (books, chapters, etc.)
+            # Use smaller chunks (500 words) for better progress feedback and memory efficiency
+            print(f"Processing {word_count} words in batches of 500...")
+            return self.batch_analyze(text, options, chunk_size=500)
         
         # Extract word-level timing from Kokoro
         words = self._extract_word_timing(text, options)
@@ -201,15 +216,27 @@ class KokoroTTSProvider(BaseProsodyProvider):
         
         # Process text through Kokoro pipeline
         # We need to tokenize first to get word boundaries
+        import time
+        t_start = time.time()
         _, tokens = self.pipeline.g2p(text)
+        t_g2p = time.time() - t_start
         
         # Generate from tokens to get duration predictions
-        for result in self.pipeline.generate_from_tokens(
-            tokens=tokens,
-            voice=self.voice,
-            speed=self.speed,
-            model=self.model
-        ):
+        # Note: Kokoro still generates audio internally even though we only need durations
+        # This is a limitation of the current Kokoro implementation
+        # Use torch.no_grad() to disable gradient computation for inference
+        t_gen_start = time.time()
+        
+        with torch.no_grad():  # Disable gradients for faster inference
+            # Try to batch process if possible by collecting all results at once
+            results = list(self.pipeline.generate_from_tokens(
+                tokens=tokens,
+                voice=self.voice,
+                speed=self.speed,
+                model=self.model
+            ))
+        
+        for result in results:
             if result.tokens and result.output and result.output.pred_dur is not None:
                 # Extract timing from tokens with timestamps
                 words_from_chunk = self._tokens_to_words(
@@ -220,6 +247,12 @@ class KokoroTTSProvider(BaseProsodyProvider):
                     options.sensitivity
                 )
                 words.extend(words_from_chunk)
+        
+        t_gen = time.time() - t_gen_start
+        
+        # Debug: print timing breakdown
+        if len(text.split()) > 100:  # Only for larger chunks
+            print(f"    [Timing] G2P: {t_g2p:.2f}s, Generation: {t_gen:.2f}s, Words: {len(words)}")
         
         return words
     
@@ -433,10 +466,14 @@ class KokoroTTSProvider(BaseProsodyProvider):
         
         # Split text into chunks at sentence boundaries
         sentences = self._split_into_sentences(text)
+        total_words = len(text.split())
         
         all_words = []
         current_chunk = []
         current_word_count = 0
+        chunks_processed = 0
+        
+        print(f"Processing {total_words} words in chunks of {chunk_size}...")
         
         for sentence in sentences:
             sentence_words = tokenize_text(sentence)
@@ -446,6 +483,17 @@ class KokoroTTSProvider(BaseProsodyProvider):
                 chunk_text = ' '.join(current_chunk)
                 chunk_words = self._extract_word_timing(chunk_text, options)
                 all_words.extend(chunk_words)
+                
+                chunks_processed += 1
+                words_processed = len(all_words)
+                progress = (words_processed / total_words) * 100
+                elapsed = time.time() - start_time
+                words_per_sec = words_processed / elapsed if elapsed > 0 else 0
+                remaining_words = total_words - words_processed
+                eta_seconds = remaining_words / words_per_sec if words_per_sec > 0 else 0
+                
+                print(f"  Chunk {chunks_processed}: {words_processed}/{total_words} words ({progress:.1f}%) | "
+                      f"{words_per_sec:.0f} w/s | ETA: {eta_seconds:.0f}s")
                 
                 current_chunk = []
                 current_word_count = 0
@@ -458,6 +506,8 @@ class KokoroTTSProvider(BaseProsodyProvider):
             chunk_text = ' '.join(current_chunk)
             chunk_words = self._extract_word_timing(chunk_text, options)
             all_words.extend(chunk_words)
+            chunks_processed += 1
+            print(f"  Chunk {chunks_processed}: {len(all_words)}/{total_words} words (100%)")
         
         # Re-index all words
         for i, word in enumerate(all_words):
@@ -465,6 +515,8 @@ class KokoroTTSProvider(BaseProsodyProvider):
         
         processing_time = time.time() - start_time
         metadata = self._calculate_metadata(all_words, processing_time)
+        
+        print(f"✓ Completed in {processing_time:.1f}s ({len(all_words) / processing_time:.0f} words/sec)")
         
         result = ProsodyResult(
             method=self.get_provider_name(),

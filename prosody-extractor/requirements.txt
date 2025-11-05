@@ -4,6 +4,7 @@ uvicorn[standard]==0.32.1
 pydantic==2.10.2
 pydantic-settings==2.6.1
 python-dotenv==1.0.1
+python-multipart==0.0.9  # Required for file uploads
 pyyaml==6.0.2
 
 # LLM Provider SDKs
@@ -22,6 +23,7 @@ soundfile>=0.12.0  # Required by Kokoro for audio handling
 # Utilities
 requests==2.32.3
 tenacity==9.0.0
+ebooklib==0.18  # For EPUB parsing
 
 # Testing
 pytest==8.3.3
