@@ -2,18 +2,30 @@
  * Core type definitions for mreader
  */
 
-export interface Word {
-  text: string
-  pivotIndex: number
-  baseDelayMs: number
-  prosody?: {
-    pause?: number // multiplier for delay
-    emphasis?: 'low' | 'medium' | 'high'
-    tone?: 'rising' | 'falling' | 'neutral'
-  }
+export type Emphasis = 'none' | 'low' | 'medium' | 'high'
+export type Tone = 'neutral' | 'rising' | 'falling'
+
+export interface ProsodyInfo {
+  pause?: number // multiplier for delay (0.5-5.0)
+  pauseAfter?: number // additional milliseconds
+  emphasis?: Emphasis
+  tone?: Tone
+  pitch?: number // optional TTS pitch in Hz
+  loudness?: number // optional TTS loudness in dB
 }
 
-export type BookFormat = 'txt' | 'epub'
+export interface Word {
+  text: string
+  index?: number // word position in sequence
+  start?: number // character position in original text
+  end?: number // character end position
+  pivotIndex: number
+  baseDelay?: number // in milliseconds (from API)
+  baseDelayMs: number // in milliseconds (app internal)
+  prosody?: ProsodyInfo
+}
+
+export type BookFormat = 'txt' | 'epub' | 'prosody'
 
 export interface Book {
   id: string
@@ -28,11 +40,34 @@ export interface Book {
   updatedAt: Date
 }
 
+export interface ProcessingMetadata {
+  wordCount: number
+  avgWordLength: number
+  totalPauses?: number
+  emphasisCount?: number
+  processingTime?: number // seconds
+  model?: string
+}
+
 export interface ProsodyData {
+  version: string // format version
+  method: string // 'rule-based' | 'mit-prosody' | 'openai' | 'anthropic'
+  metadata: ProcessingMetadata
+  words: Word[]
   analyzed: boolean
   lastAnalyzed?: Date
-  method: 'rule-based' | 'llm'
+}
+
+// Prosody book format - JSON file with pre-analyzed prosody
+// This wraps the API response with book metadata
+export interface ProsodyBookFile {
+  title: string
+  author?: string
+  // The rest is the direct API response (ProsodyResult)
   version: string
+  method: string
+  metadata: ProcessingMetadata
+  words: Word[]
 }
 
 export type Theme = 'light' | 'dark' | 'book'

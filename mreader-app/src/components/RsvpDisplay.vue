@@ -1,17 +1,19 @@
 <template>
   <div class="rsvp-display">
     <div v-if="currentWord" class="word-container">
-      <!-- Word with pivot alignment -->
-      <div v-if="showPivotHighlight" class="word pivot-mode">
-        <div class="pivot-wrapper">
-          <span class="word-part before-pivot">{{ beforePivot }}</span><!--
-       --><span class="word-part pivot">{{ pivotChar }}</span><!--
-       --><span class="word-part after-pivot">{{ afterPivot }}</span>
+      <!-- Word with pivot alignment - wrapped in transition -->
+      <transition name="fade" mode="out-in">
+        <div v-if="showPivotHighlight" :key="`pivot-${currentWord.text}`" class="word pivot-mode">
+          <div class="pivot-wrapper">
+            <span class="word-part before-pivot">{{ beforePivot }}</span><!--
+         --><span class="word-part pivot">{{ pivotChar }}</span><!--
+         --><span class="word-part after-pivot">{{ afterPivot }}</span>
+          </div>
         </div>
-      </div>
-      <div v-else class="word">
-        <span class="full-word">{{ currentWord.text }}</span>
-      </div>
+        <div v-else :key="`full-${currentWord.text}`" class="word">
+          <span class="full-word">{{ currentWord.text }}</span>
+        </div>
+      </transition>
 
       <!-- Progress indicator -->
       <div class="progress-bar">
@@ -194,5 +196,24 @@ const afterPivot = computed(() => {
   .no-word {
     font-size: 1.25rem;
   }
+}
+
+/* Smooth fade transitions for word changes */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 60ms ease-in-out;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 </style>

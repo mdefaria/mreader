@@ -125,8 +125,14 @@ export function calculateWordDelay(
 ): number {
   let delay = baseDelay
 
+  // Apply pause multiplier (main prosody timing adjustment)
   if (prosody?.pause) {
     delay *= prosody.pause
+  }
+
+  // Add fixed pause after word (from API's pauseAfter field)
+  if (prosody?.pauseAfter) {
+    delay += prosody.pauseAfter
   }
 
   // Emphasis can also affect timing slightly
@@ -134,7 +140,22 @@ export function calculateWordDelay(
     delay *= 1.2
   } else if (prosody?.emphasis === 'medium') {
     delay *= 1.1
+  } else if (prosody?.emphasis === 'low') {
+    delay *= 1.05
   }
 
-  return Math.round(delay)
+  const finalDelay = Math.round(delay)
+  
+  // Debug logging for first few words
+  if (prosody && Math.random() < 0.05) { // Log 5% of words to avoid spam
+    console.log('⏱️  Word timing:', {
+      base: `${baseDelay}ms`,
+      pause: prosody.pause || 1,
+      pauseAfter: prosody.pauseAfter || 0,
+      emphasis: prosody.emphasis || 'none',
+      final: `${finalDelay}ms`
+    })
+  }
+  
+  return finalDelay
 }

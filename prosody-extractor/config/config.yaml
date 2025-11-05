@@ -1,15 +1,29 @@
 prosody:
-  default_provider: "rule-based"
+  default_provider: "mit-prosody"  # Changed to context-aware provider
   base_wpm: 300
   sensitivity: 0.7
   
   providers:
+    rule-based:
+      # Fast, offline, no dependencies
+      # Good for: quick processing, offline use
+      pass
+    
+    mit-prosody:
+      # Context-aware transformer-based prosody
+      # Best for: natural reading cadence, quality output
+      model: "bert-base-uncased"  # or "gpt2"
+      device: "auto"  # auto-detect CPU/GPU/MPS
+      cache_dir: null  # use default cache
+    
     openai:
+      # General-purpose LLM (not recommended for prosody)
       model: "gpt-4o-mini"
       temperature: 0.3
       max_tokens: 2000
     
     anthropic:
+      # General-purpose LLM (not recommended for prosody)
       model: "claude-3-5-sonnet-20241022"
       temperature: 0.3
       max_tokens: 2000

@@ -4,7 +4,7 @@
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Book, BookFormat } from '@/types'
+import type { Book, BookFormat, ProsodyBookFile } from '@/types'
 import { storage } from '@/services/storage'
 import { extractTitle, countWords } from '@/utils/tokenize'
 import { parseEpubFile, isEpubFile } from '@/utils/epub-parser'
@@ -91,6 +91,59 @@ export const useLibraryStore = defineStore('library', () => {
 
   // Import book from file
   async function importBookFromFile(file: File): Promise<Book> {
+    // Check if it's a prosody JSON file
+    if (file.name.endsWith('.prosody.json') || 
+        (file.name.endsWith('.json') && file.type === 'application/json')) {
+      try {
+        const jsonContent = await file.text()
+        const prosodyBook = JSON.parse(jsonContent) as ProsodyBookFile
+        
+        // Validate prosody book format (API response + title)
+        if (!prosodyBook.version || !prosodyBook.words || !prosodyBook.title) {
+          throw new Error('Invalid prosody book format')
+        }
+        
+        // Reconstruct text from words
+        const text = prosodyBook.words.map(w => w.text).join(' ')
+        
+        console.log('📚 Importing prosody book:', {
+          title: prosodyBook.title,
+          author: prosodyBook.author,
+          method: prosodyBook.method,
+          wordCount: prosodyBook.metadata.wordCount,
+          firstWord: prosodyBook.words[0]
+        })
+        
+        // Create book with embedded prosody data
+        const book: Book = {
+          id: crypto.randomUUID(),
+          title: prosodyBook.title,
+          author: prosodyBook.author,
+          content: text,
+          format: 'prosody',
+          lastPosition: 0,
+          totalWords: prosodyBook.metadata.wordCount,
+          prosodyData: {
+            version: prosodyBook.version,
+            method: prosodyBook.method,
+            metadata: prosodyBook.metadata,
+            words: prosodyBook.words,
+            analyzed: true,
+            lastAnalyzed: new Date(),
+          },
+          addedAt: new Date(),
+          updatedAt: new Date(),
+        }
+        
+        await storage.addBook(book)
+        books.value.push(book)
+        return book
+      } catch (error) {
+        console.error('Failed to parse prosody book:', error)
+        throw new Error('Invalid prosody book file')
+      }
+    }
+
     // Check if it's an EPUB file
     if (isEpubFile(file)) {
       const { content, metadata } = await parseEpubFile(file)

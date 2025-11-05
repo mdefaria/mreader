@@ -4,15 +4,17 @@ A standalone Python module for extracting and generating prosody information (in
 
 ## Features
 
-- **Provider-Agnostic Architecture**: Easy switching between LLM providers (OpenAI, Anthropic, local models)
+- **Provider-Agnostic Architecture**: Easy switching between prosody extraction methods
 - **Multiple Processing Methods**:
-  - Rule-based (fast, no API required, ~95% effective)
-  - LLM-enhanced (OpenAI, Anthropic)
+  - **MIT-Prosody (RECOMMENDED)**: Context-aware transformer-based prosody prediction
+  - **Rule-based**: Fast, no API required, ~85% effective
+  - LLM-enhanced (OpenAI, Anthropic) - not recommended for prosody
   - Extensible for custom providers
+- **Context-Aware**: MIT-Prosody understands sentence structure for natural reading cadence
 - **Local Development First**: Run and test locally before deploying to cloud
 - **Cloud-Ready**: Structured for deployment as AWS Lambda, Google Cloud Functions, or other serverless platforms
 - **FastAPI Server**: Built-in REST API for local testing and production deployment
-- **Offline Capable**: Rule-based analyzer works without internet connection
+- **Offline Capable**: MIT-Prosody and rule-based analyzers work without internet connection
 
 ## Quick Start
 
@@ -38,7 +40,32 @@ ANTHROPIC_API_KEY=your_key_here
 
 ### Basic Usage
 
-#### Rule-Based Analysis (No API Required)
+#### MIT-Prosody (Context-Aware - RECOMMENDED)
+
+```python
+from src.core.processor import ProsodyProcessor
+
+# Initialize with MIT-Prosody (context-aware)
+processor = ProsodyProcessor(
+    provider="mit-prosody",
+    model="bert-base-uncased",  # or "gpt2"
+    device="auto"  # auto-detect GPU/CPU/MPS
+)
+
+# Analyze text with natural reading cadence
+text = "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife."
+result = processor.analyze(text, wpm=300, sensitivity=0.7)
+
+print(result)
+# Features:
+# - Context-aware prosody (understands sentence structure)
+# - Natural reading rhythm
+# - Word-level prominence prediction
+# - No API keys required
+# - Can run on CPU or GPU
+```
+
+#### Rule-Based Analysis (Fast, Simple)
 
 ```python
 from src.core.processor import ProsodyProcessor
@@ -53,12 +80,14 @@ result = processor.analyze(text)
 print(result)
 ```
 
-#### LLM-Enhanced Analysis
+#### LLM-Enhanced Analysis (Not Recommended)
+
+**Note**: General-purpose LLMs are not optimal for prosody extraction. Use MIT-Prosody instead for better quality at lower cost.
 
 ```python
 from src.core.processor import ProsodyProcessor
 
-# Initialize with OpenAI
+# Only use if you specifically need LLM features
 processor = ProsodyProcessor(
     provider="openai",
     model="gpt-4o-mini"
@@ -253,11 +282,14 @@ See the `examples/` directory for complete working examples:
 
 Based on November 2025 pricing:
 
-| Provider | Cost per 100K words | Speed | Accuracy |
-|----------|-------------------|-------|----------|
-| Rule-based | ~$0.001 | 4-5 sec | ⭐⭐⭐ |
-| OpenAI (GPT-4o-mini) | ~$0.05-0.15 | 30-90 sec | ⭐⭐⭐⭐ |
-| Anthropic (Claude 3.5) | ~$0.10-0.20 | 30-90 sec | ⭐⭐⭐⭐⭐ |
+| Provider | Cost per 100K words | Speed | Accuracy | Context-Aware |
+|----------|-------------------|-------|----------|---------------|
+| **MIT-Prosody** (RECOMMENDED) | ~$0.05 | 45 sec | ⭐⭐⭐⭐ | ✅ Yes |
+| Rule-based | ~$0.001 | 4-5 sec | ⭐⭐⭐ | ❌ No |
+| OpenAI (GPT-4o-mini) | ~$0.05-0.15 | 30-90 sec | ⭐⭐⭐⭐ | ⚠️ Limited |
+| Anthropic (Claude 3.5) | ~$0.10-0.20 | 30-90 sec | ⭐⭐⭐⭐⭐ | ⚠️ Limited |
+
+**Recommendation**: Use MIT-Prosody for best quality/cost ratio with true context awareness.
 
 ## Contributing
 
