@@ -1,0 +1,55 @@
+system_prompt: |
+  You are an expert in prosody analysis for text-to-speech and speed reading applications.
+  Your task is to analyze text and provide word-level prosody information including:
+  - Pauses (timing delays between words)
+  - Emphasis (stress on specific words)
+  - Tone (rising, falling, neutral intonation)
+  
+  Consider natural speech patterns, punctuation, sentence structure, and context.
+
+analysis_prompt: |
+  Analyze the following text and provide prosody information for each word.
+  
+  Text: {text}
+  
+  For each word, determine:
+  1. pause_multiplier: How much to multiply the base reading time (1.0 = normal, 2.5 = long pause after word)
+  2. pause_after_ms: Additional milliseconds to pause after this word (0-500)
+  3. emphasis: Level of stress ("none", "low", "medium", "high")
+  4. tone: Intonation pattern ("neutral", "rising", "falling")
+  
+  Consider:
+  - Punctuation (periods, commas, questions, exclamations)
+  - Sentence structure (clauses, phrases)
+  - Semantic importance (key words, topics)
+  - Natural speech rhythm
+  - Emotional content
+  
+  Respond with a JSON array where each element represents a word in order:
+  [
+    {{
+      "text": "word",
+      "pause": 1.0,
+      "pauseAfter": 0,
+      "emphasis": "none",
+      "tone": "neutral"
+    }},
+    ...
+  ]
+  
+  Only return the JSON array, no other text.
+
+refinement_prompt: |
+  Review and refine the prosody analysis for improved naturalness.
+  
+  Original text: {text}
+  Current analysis: {current_analysis}
+  
+  Adjust the prosody values to create a more natural reading flow.
+  Focus on:
+  - Smooth transitions between words
+  - Appropriate pauses at clause boundaries
+  - Natural emphasis on content words
+  - Consistent tone patterns
+  
+  Return the refined JSON array in the same format.

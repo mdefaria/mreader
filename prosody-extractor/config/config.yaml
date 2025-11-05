@@ -1,0 +1,23 @@
+prosody:
+  default_provider: "rule-based"
+  base_wpm: 300
+  sensitivity: 0.7
+  
+  providers:
+    openai:
+      model: "gpt-4o-mini"
+      temperature: 0.3
+      max_tokens: 2000
+    
+    anthropic:
+      model: "claude-3-5-sonnet-20241022"
+      temperature: 0.3
+      max_tokens: 2000
+
+app:
+  log_level: "INFO"
+  timeout: 30
+  retry_attempts: 3
+  max_retries: 3
+  base_delay: 1.0
+  exponential_base: 2.0
