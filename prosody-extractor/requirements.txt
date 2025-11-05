@@ -10,10 +10,14 @@ pyyaml==6.0.2
 openai==1.55.3
 anthropic==0.39.0
 
-# ML/Transformer Models (optional, for MIT-Prosody provider)
+# ML/Transformer Models (optional, for MIT-Prosody and Kokoro TTS providers)
 torch>=2.0.0
 transformers>=4.30.0
 numpy>=1.24.0
+
+# Kokoro TTS (optional, for natural timing extraction)
+kokoro>=0.9.2
+soundfile>=0.12.0  # Required by Kokoro for audio handling
 
 # Utilities
 requests==2.32.3
