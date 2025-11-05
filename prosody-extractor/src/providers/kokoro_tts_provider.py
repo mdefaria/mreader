@@ -284,9 +284,68 @@ class KokoroTTSProvider(BaseProsodyProvider):
             if not token.text or not token.text.strip():
                 continue
             
-            # Skip tokens that are only punctuation (e.g., standalone commas/periods)
-            # These are artifacts from Kokoro's tokenization
+            # Handle punctuation-only tokens by merging with previous word
             if not any(c.isalnum() for c in token.text):
+                # If there's a previous word, merge punctuation with it
+                if words:
+                    prev_word = words[-1]
+                    
+                    # Get timing information for punctuation token
+                    start_ts = getattr(token, 'start_ts', None)
+                    end_ts = getattr(token, 'end_ts', None)
+                    
+                    # Calculate duration in milliseconds
+                    if start_ts is not None and end_ts is not None:
+                        punct_duration_ms = int((end_ts - start_ts) * 1000)
+                    else:
+                        punct_duration_ms = base_delay_ms
+                    
+                    # Get prosody data from punctuation
+                    punct_prosody = self._timing_to_prosody(
+                        token.text,
+                        punct_duration_ms,
+                        base_delay_ms,
+                        sensitivity,
+                        token.phonemes
+                    )
+                    
+                    # Append punctuation to previous word's text
+                    prev_word.text = prev_word.text + token.text
+                    
+                    # Merge prosody data with previous word
+                    # Add durations together - baseDelay represents actual display time
+                    prev_word.baseDelay = prev_word.baseDelay + punct_duration_ms
+                    
+                    # Add pauseAfter values together (cumulative pause after word+punctuation)
+                    prev_word.prosody.pauseAfter = (
+                        prev_word.prosody.pauseAfter + punct_prosody.pauseAfter
+                    )
+                    
+                    # Keep the stronger emphasis
+                    emphasis_order = {
+                        Emphasis.NONE: 0,
+                        Emphasis.LOW: 1,
+                        Emphasis.MEDIUM: 2,
+                        Emphasis.HIGH: 3
+                    }
+                    if emphasis_order.get(punct_prosody.emphasis, 0) > emphasis_order.get(prev_word.prosody.emphasis, 0):
+                        prev_word.prosody.emphasis = punct_prosody.emphasis
+                    
+                    # Update tone if punctuation provides more specific tone
+                    # Punctuation tone (from endings like ?, !, .) takes precedence
+                    if punct_prosody.tone != Tone.NEUTRAL:
+                        prev_word.prosody.tone = punct_prosody.tone
+                    
+                    # Note: We don't modify pause multiplier as baseDelay already includes
+                    # the actual timing from TTS. The pause multiplier in prosody is for
+                    # additional adjustments beyond the base timing.
+                    
+                    # Update end position to include punctuation
+                    punct_end = getattr(token, 'end', prev_word.end + len(token.text))
+                    prev_word.end = punct_end
+                    
+                # If no previous word exists, skip the punctuation token
+                # (edge case: text starts with punctuation)
                 continue
             
             # Get timing information if available

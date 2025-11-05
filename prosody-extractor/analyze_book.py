@@ -168,7 +168,14 @@ def main():
         if output_format == "json":
             # Write JSON output
             output_data = result.model_dump()
+            
+            # Add title and author from metadata at the top level
             if metadata:
+                if metadata.get('title'):
+                    output_data['title'] = metadata['title']
+                if metadata.get('author'):
+                    output_data['author'] = metadata['author']
+                # Keep full metadata for reference
                 output_data['epub_metadata'] = metadata
             
             with open(args.output_file, 'w', encoding='utf-8') as f:
