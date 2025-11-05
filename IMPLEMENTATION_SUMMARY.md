@@ -38,13 +38,12 @@ Modified the `_tokens_to_words()` method in the Kokoro TTS provider to merge pun
 The merging logic carefully combines prosody information:
 
 1. **Base Delay**: Added together to account for both word and punctuation timing
-2. **Pause Multiplier**: Weighted average based on duration
-   ```
-   combined_pause = (prev_pause * prev_duration + punct_pause * punct_duration) / total_duration
-   ```
-3. **Pause After**: Simple addition (both pauses are honored)
-4. **Emphasis**: Keep the stronger of the two (HIGH > MEDIUM > LOW > NONE)
-5. **Tone**: Punctuation tone overrides if not neutral (e.g., `?` = RISING, `.` = FALLING)
+   - Since Kokoro provides TTS-predicted durations, `baseDelay` represents actual display time
+   - Combined duration = word duration + punctuation duration
+2. **Pause After**: Simple addition (both pauses are honored cumulatively)
+3. **Emphasis**: Keep the stronger of the two (HIGH > MEDIUM > LOW > NONE)
+4. **Tone**: Punctuation tone overrides if not neutral (e.g., `?` = RISING, `.` = FALLING)
+5. **Pause Multiplier**: Not modified - `baseDelay` already includes the actual TTS timing
 
 ## Testing
 
