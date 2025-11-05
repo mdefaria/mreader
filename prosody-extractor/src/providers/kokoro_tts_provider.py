@@ -313,23 +313,10 @@ class KokoroTTSProvider(BaseProsodyProvider):
                     prev_word.text = prev_word.text + token.text
                     
                     # Merge prosody data with previous word
-                    # Add durations together for base delay
+                    # Add durations together - baseDelay represents actual display time
                     prev_word.baseDelay = prev_word.baseDelay + punct_duration_ms
                     
-                    # Update pause multiplier - use weighted average based on duration
-                    total_duration = prev_word.baseDelay
-                    prev_duration = prev_word.baseDelay - punct_duration_ms
-                    prev_pause = prev_word.prosody.pause
-                    punct_pause = punct_prosody.pause
-                    
-                    # Weighted average of pause multipliers
-                    combined_pause = (
-                        (prev_pause * prev_duration + punct_pause * punct_duration_ms) / 
-                        total_duration
-                    )
-                    prev_word.prosody.pause = max(0.5, min(5.0, combined_pause))
-                    
-                    # Add pauseAfter values together
+                    # Add pauseAfter values together (cumulative pause after word+punctuation)
                     prev_word.prosody.pauseAfter = (
                         prev_word.prosody.pauseAfter + punct_prosody.pauseAfter
                     )
@@ -345,8 +332,13 @@ class KokoroTTSProvider(BaseProsodyProvider):
                         prev_word.prosody.emphasis = punct_prosody.emphasis
                     
                     # Update tone if punctuation provides more specific tone
+                    # Punctuation tone (from endings like ?, !, .) takes precedence
                     if punct_prosody.tone != Tone.NEUTRAL:
                         prev_word.prosody.tone = punct_prosody.tone
+                    
+                    # Note: We don't modify pause multiplier as baseDelay already includes
+                    # the actual timing from TTS. The pause multiplier in prosody is for
+                    # additional adjustments beyond the base timing.
                     
                     # Update end position to include punctuation
                     punct_end = getattr(token, 'end', prev_word.end + len(token.text))

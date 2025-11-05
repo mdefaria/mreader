@@ -37,21 +37,24 @@ def test_punctuation_merging_mock():
     print("\n=== Mock Test: Punctuation Merging ===\n")
     
     # Create mock tokens: "Hello" + "," + "world" + "!"
+    # Token durations: 500ms + 100ms = 600ms for "Hello,", 500ms + 100ms = 600ms for "world!"
+    WORD_DURATION_MS = 500
+    PUNCT_DURATION_MS = 100
+    EXPECTED_MERGED_DURATION_MS = WORD_DURATION_MS + PUNCT_DURATION_MS
+    
     mock_tokens = [
-        create_mock_token("Hello", 0.0, 0.5),
-        create_mock_token(",", 0.5, 0.6),
-        create_mock_token("world", 0.6, 1.1),
-        create_mock_token("!", 1.1, 1.2),
+        create_mock_token("Hello", 0.0, 0.5),  # 500ms
+        create_mock_token(",", 0.5, 0.6),      # 100ms
+        create_mock_token("world", 0.6, 1.1),  # 500ms
+        create_mock_token("!", 1.1, 1.2),      # 100ms
     ]
     
     print("Input tokens:")
     for i, token in enumerate(mock_tokens):
         print(f"  {i}: '{token.text}' (alphanumeric: {any(c.isalnum() for c in token.text)})")
     
-    # Simulate the merging logic
+    # Simulate the merging logic (without base_delay_ms and sensitivity since we don't use them)
     words = []
-    base_delay_ms = 200  # milliseconds per word
-    sensitivity = 0.7
     
     for token in mock_tokens:
         # Skip empty tokens or whitespace-only tokens
@@ -97,8 +100,10 @@ def test_punctuation_merging_mock():
     assert words[1]['text'] == "world!", f"Expected 'world!', got '{words[1]['text']}'"
     
     # Verify durations include punctuation timing (with 1ms tolerance for rounding)
-    assert abs(words[0]['duration_ms'] - 600) <= 1, f"Expected ~600ms for 'Hello,', got {words[0]['duration_ms']}ms"
-    assert abs(words[1]['duration_ms'] - 600) <= 1, f"Expected ~600ms for 'world!', got {words[1]['duration_ms']}ms"
+    assert abs(words[0]['duration_ms'] - EXPECTED_MERGED_DURATION_MS) <= 1, \
+        f"Expected ~{EXPECTED_MERGED_DURATION_MS}ms for 'Hello,', got {words[0]['duration_ms']}ms"
+    assert abs(words[1]['duration_ms'] - EXPECTED_MERGED_DURATION_MS) <= 1, \
+        f"Expected ~{EXPECTED_MERGED_DURATION_MS}ms for 'world!', got {words[1]['duration_ms']}ms"
     
     print("\n✅ All tests passed!")
     return True
